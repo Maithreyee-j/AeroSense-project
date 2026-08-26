@@ -263,26 +263,28 @@ function layout(content, activeRoute = 'home') {
 // ============================================================================
 function loginPage() {
   app.innerHTML = `
-    <div class="auth card">
-      <img src="/icon.png" alt="AeroSense" style="width:64px;height:64px;border-radius:16px;box-shadow:0 8px 24px var(--primary-glow);display:block;margin:0 auto 16px auto">
-      <h1 style="text-align:center">AeroSense Sign In</h1>
-      <p class="muted" style="text-align:center">Access global atmospheric air quality tracking, family safety radar, and live WHO health intelligence.</p>
-      <form id="login" style="margin-top:18px">
-        <div class="field">
-          <label>Email Address</label>
-          <input id="email" type="email" placeholder="name@example.com" required autocomplete="email">
+    <div class="auth-wrapper">
+      <div class="auth card">
+        <img src="/icon.png" alt="AeroSense" style="width:64px;height:64px;border-radius:16px;box-shadow:0 8px 24px var(--primary-glow);display:block;margin:0 auto 16px auto">
+        <h1 style="text-align:center">AeroSense Sign In</h1>
+        <p class="muted" style="text-align:center">Access global atmospheric air quality tracking, family safety radar, and live WHO health intelligence.</p>
+        <form id="login" style="margin-top:18px">
+          <div class="field">
+            <label>Email Address</label>
+            <input id="email" type="email" placeholder="name@example.com" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input id="password" type="password" minlength="8" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <button class="btn" style="width:100%;margin-top:8px">Sign In to AeroSense</button>
+        </form>
+        <p id="msg" style="margin-top:14px"></p>
+        <hr style="border:0;border-top:1px solid var(--border-subtle);margin:22px 0">
+        <div style="text-align:center">
+          <span class="muted">New to AeroSense? </span>
+          <button class="btn secondary sm" onclick="registerPage()">Create an account</button>
         </div>
-        <div class="field">
-          <label>Password</label>
-          <input id="password" type="password" minlength="8" placeholder="••••••••" required autocomplete="current-password">
-        </div>
-        <button class="btn" style="width:100%;margin-top:8px">Sign In to AeroSense</button>
-      </form>
-      <p id="msg" style="margin-top:14px"></p>
-      <hr style="border:0;border-top:1px solid var(--border-subtle);margin:22px 0">
-      <div style="text-align:center">
-        <span class="muted">New to AeroSense? </span>
-        <button class="btn secondary sm" onclick="registerPage()">Create an account</button>
       </div>
     </div>
   `;
@@ -307,76 +309,79 @@ function loginPage() {
 
 function registerPage() {
   app.innerHTML = `
-    <div class="auth card" style="max-width:550px">
-      <img src="/icon.png" alt="AeroSense" style="width:64px;height:64px;border-radius:16px;box-shadow:0 8px 24px var(--primary-glow);display:block;margin:0 auto 16px auto">
-      <h1 style="text-align:center">Create AeroSense Account</h1>
-      <p class="muted" style="text-align:center">Join AeroSense to monitor global atmospheric exposure and protect your family with automated risk alerts.</p>
-      <form id="reg" style="margin-top:18px">
-        <div class="field">
-          <label>Full Name</label>
-          <input id="name" placeholder="e.g. Jane Doe" required autocomplete="name">
-        </div>
-        <div class="row">
-          <div class="field" style="flex:1">
-            <label>Email Address</label>
-            <input id="email" type="email" placeholder="jane@example.com" required autocomplete="email">
+    <div class="auth-wrapper">
+      <div class="auth card" style="max-width:550px">
+        <img src="/icon.png" alt="AeroSense" style="width:64px;height:64px;border-radius:16px;box-shadow:0 8px 24px var(--primary-glow);display:block;margin:0 auto 16px auto">
+        <h1 style="text-align:center">Create AeroSense Account</h1>
+        <p class="muted" style="text-align:center">Join AeroSense to monitor global atmospheric exposure and protect your family with automated risk alerts.</p>
+        <form id="reg" style="margin-top:18px">
+          <div class="field">
+            <label>Full Name</label>
+            <input id="name" placeholder="e.g. Jane Doe" required autocomplete="name">
           </div>
-          <div class="field" style="flex:1">
-            <label>Phone (For Family SMS Alerts)</label>
-            <input id="phone" type="tel" placeholder="+1 (555) 019-2834" autocomplete="tel">
+          <div class="row">
+            <div class="field" style="flex:1">
+              <label>Email Address</label>
+              <input id="email" type="email" placeholder="jane@example.com" required autocomplete="email">
+            </div>
+            <div class="field" style="flex:1">
+              <label>Phone (For Family SMS Alerts)</label>
+              <input id="phone" type="tel" placeholder="+1 (555) 019-2834" autocomplete="tel">
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="field" style="flex:1">
-            <label>Age</label>
-            <input id="age" type="number" min="1" max="120" placeholder="e.g. 28">
+          <div class="row">
+            <div class="field" style="flex:1">
+              <label>Age</label>
+              <input id="age" type="number" min="1" max="120" placeholder="e.g. 28">
+            </div>
+            <div class="field" style="flex:1">
+              <label>Gender</label>
+              <select id="gender">
+                <option value="">Select</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="field" style="flex:1">
+              <label>Blood Group</label>
+              <select id="bloodGroup">
+                <option value="">Select</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
           </div>
-          <div class="field" style="flex:1">
-            <label>Gender</label>
-            <select id="gender">
-              <option value="">Select</option>
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-              <option value="Non-binary">Non-binary</option>
-              <option value="Prefer not to say">Prefer not to say</option>
+          <div class="field">
+            <label>Account Type</label>
+            <select id="role">
+              <option value="user">User / Family Member</option>
+              <option value="expert">Professional Health & Environmental Expert</option>
             </select>
           </div>
-          <div class="field" style="flex:1">
-            <label>Blood Group</label>
-            <select id="bloodGroup">
-              <option value="">Select</option>
-              <option value="A+">A+</option>
-              <option value="A-">A-</option>
-              <option value="B+">B+</option>
-              <option value="B-">B-</option>
-              <option value="AB+">AB+</option>
-              <option value="AB-">AB-</option>
-              <option value="O+">O+</option>
-              <option value="O-">O-</option>
-            </select>
+          <div class="field">
+            <label>Password (Min. 8 characters)</label>
+            <input id="password" type="password" minlength="8" placeholder="••••••••" required autocomplete="new-password">
           </div>
+          <button class="btn" style="width:100%;margin-top:12px;padding:12px">Complete Registration</button>
+        </form>
+        <p id="msg" style="margin-top:14px"></p>
+        <hr style="border:0;border-top:1px solid var(--border-subtle);margin:22px 0">
+        <div style="text-align:center;padding-bottom:10px">
+          <span class="muted">Already registered? </span>
+          <button class="btn secondary sm" onclick="loginPage()">Back to sign in</button>
         </div>
-        <div class="field">
-          <label>Account Type</label>
-          <select id="role">
-            <option value="user">User / Family Member</option>
-            <option value="expert">Professional Health & Environmental Expert</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Password (Min. 8 characters)</label>
-          <input id="password" type="password" minlength="8" placeholder="••••••••" required autocomplete="new-password">
-        </div>
-        <button class="btn" style="width:100%;margin-top:8px">Complete Registration</button>
-      </form>
-      <p id="msg" style="margin-top:14px"></p>
-      <hr style="border:0;border-top:1px solid var(--border-subtle);margin:22px 0">
-      <div style="text-align:center">
-        <span class="muted">Already registered? </span>
-        <button class="btn secondary sm" onclick="loginPage()">Back to sign in</button>
       </div>
     </div>
   `;
+
   const reg = document.getElementById('reg');
   const msg = document.getElementById('msg');
   reg.onsubmit = async e => {
