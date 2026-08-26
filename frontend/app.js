@@ -214,22 +214,24 @@ function layout(content, activeRoute = 'home') {
         <!-- Sidebar Footer -->
         <div class="sidebar-footer">
           ${me ? `
-            <div class="user-profile-mini" onclick="go('profile')" title="View & Edit Health Profile">
-              <div class="user-avatar-circle">${esc(me.name ? me.name[0].toUpperCase() : 'U')}</div>
-              <div style="overflow:hidden">
-                <div style="font-weight:700;font-size:13.5px;color:var(--text-main);white-space:nowrap;text-overflow:ellipsis;overflow:hidden">${esc(me.name || me.email)}</div>
-                <div class="muted" style="font-size:11.5px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden">${esc(me.phone || me.email)}</div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+              <div class="user-profile-mini" style="flex:1" onclick="go('profile')" title="View & Edit Health Profile">
+                <div class="user-avatar-circle">${esc(me.name ? me.name[0].toUpperCase() : 'U')}</div>
+                <div style="overflow:hidden">
+                  <div style="font-weight:700;font-size:13.5px;color:var(--text-main);white-space:nowrap;text-overflow:ellipsis;overflow:hidden">${esc(me.name || me.email)}</div>
+                  <div class="muted" style="font-size:11.5px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden">${esc(me.phone || me.email)}</div>
+                </div>
               </div>
+              <button class="btn secondary sm" style="padding:9px 10px;color:var(--danger);border-color:var(--border-subtle)" title="Sign Out of AeroSense" onclick="logout()">🚪</button>
             </div>
           ` : ''}
 
           <div class="sidebar-actions-row">
             <button class="sos-button" style="flex:1" onclick="triggerEmergencySOS()" title="Broadcast Emergency SOS to Family via SMS">🚨 SOS</button>
             <button id="themeToggleBtn" class="btn secondary sm" style="padding:8px 10px" title="Toggle Dark/Light Mode" onclick="toggleTheme()">${themeIcon}</button>
-            <button class="btn secondary sm" style="padding:8px 10px" title="Mobile QR Scanner & Install App" onclick="showQrCodeModal()">📱</button>
             <button class="btn secondary sm" style="padding:8px 10px" title="Listen to Voice Safety Briefing" onclick="speakCurrentAdvisory()">🔊</button>
             <button class="btn secondary sm" style="padding:8px 10px" title="Print Emergency Medical Passport" onclick="exportMedicalPassport()">📄</button>
-            <button class="btn secondary sm" style="padding:8px 10px" title="Logout" onclick="logout()">🚪</button>
+            <button class="btn secondary sm" style="padding:8px 10px;color:var(--danger)" title="Logout" onclick="logout()">🚪</button>
           </div>
         </div>
       </aside>
@@ -2237,6 +2239,26 @@ function settings() {
         <button class="btn" style="margin-top:20px;width:100%">Save Privacy & Alert Settings</button>
       </form>
       <p id="setMsg" style="margin-top:12px"></p>
+
+      <hr style="border:0;border-top:1px solid var(--border-subtle);margin:26px 0 20px 0">
+
+      <h2>Account & Session</h2>
+      <p class="muted" style="font-size:12.5px;margin-bottom:14px">Manage your current active login session or sign out securely.</p>
+
+      <div class="listitem" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="account-avatar">${esc((me?.name || 'U').charAt(0).toUpperCase())}</div>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--text-main)">${esc(me?.name || 'User')}</div>
+            <div class="muted" style="font-size:12px">${esc(me?.email || '')} • <span class="pill sm ${me?.role==='expert'?'high':'low'}" style="padding:1px 6px;font-size:10px">${esc(me?.role || 'user')}</span></div>
+          </div>
+        </div>
+        <button class="btn secondary sm" type="button" onclick="go('profile')">Edit Profile</button>
+      </div>
+
+      <button type="button" class="btn secondary" style="width:100%;border-color:var(--danger);color:var(--danger);font-weight:700;padding:12px" onclick="logout()">
+        🚪 Log Out / Sign Out of AeroSense
+      </button>
     </div>
   `, 'settings');
 
