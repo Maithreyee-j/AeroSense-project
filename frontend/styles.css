@@ -167,14 +167,26 @@ a:hover {
   z-index: 100;
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sidebar-main-scroll {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .sidebar-header {
-  padding: 22px 20px 16px 20px;
+  padding: 20px 18px 14px 18px;
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
 }
 
 .sidebar-brand-wrapper {
@@ -217,11 +229,32 @@ a:hover {
 
 .sidebar-nav {
   flex: 1;
-  padding: 14px 12px;
+  padding: 12px 10px;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(2, 132, 199, 0.3) transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 99px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }
 
 .nav-section-title {
@@ -274,12 +307,13 @@ a:hover {
 }
 
 .sidebar-footer {
-  padding: 16px 14px;
+  padding: 14px 14px;
   border-top: 1px solid var(--border-subtle);
   background: var(--bg-card);
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .user-profile-mini {

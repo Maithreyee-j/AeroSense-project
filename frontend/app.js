@@ -105,7 +105,7 @@ function layout(content, activeRoute = 'home') {
 
       <!-- Professional Left Sidebar -->
       <aside id="sidebar" class="sidebar">
-        <div>
+        <div class="sidebar-main-scroll">
           <div class="sidebar-header">
             <div class="sidebar-brand-wrapper" onclick="go('home')">
               <div class="brand-logo">A</div>
