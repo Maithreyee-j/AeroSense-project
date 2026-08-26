@@ -1,9 +1,22 @@
 {
-  "name":"aerosense",
-  "version":"1.0.0",
-  "private":true,
-  "description":"AeroSense real-time atmospheric risk mapping and environmental infection-susceptibility estimation system",
-  "type":"module",
-  "scripts":{"start":"node backend/server.js","dev":"node --watch backend/server.js","test:300":"node tests/run300.mjs","test":"npm run test:300"},
-  "dependencies":{"express":"^5.1.0","cors":"^2.8.5","helmet":"^8.1.0","bcryptjs":"^3.0.2","jsonwebtoken":"^9.0.2","dotenv":"^17.2.1"}
+  "name": "aerosense",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AeroSense real-time atmospheric risk mapping and environmental infection-susceptibility estimation system",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "tunnel": "npx -y localtunnel --port 3000",
+    "test:300": "node tests/run300.mjs",
+    "test": "npm run test:300"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "cors": "^2.8.5",
+    "helmet": "^8.1.0",
+    "bcryptjs": "^3.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^17.2.1"
+  }
 }

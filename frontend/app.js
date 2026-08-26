@@ -1938,12 +1938,19 @@ window.addEventListener('beforeinstallprompt', e => {
   if (banner) banner.style.display = 'flex';
 });
 
+let qrCodeInstance = null;
+
 async function showQrCodeModal() {
-  let appUrl = window.location.origin;
+  let defaultUrl = window.location.origin;
+  let localIpUrl = '';
   try {
     const net = await api('/network-info');
     if (net && net.primaryUrl) {
-      appUrl = net.primaryUrl;
+      localIpUrl = net.primaryUrl;
+      // If we are currently on localhost, default to the local IP URL
+      if (defaultUrl.includes('localhost') || defaultUrl.includes('127.0.0.1')) {
+        defaultUrl = localIpUrl;
+      }
     }
   } catch {}
 
@@ -1955,53 +1962,81 @@ async function showQrCodeModal() {
   };
 
   modal.innerHTML = `
-    <div class="modal-box">
+    <div class="modal-box" style="max-width:520px">
       <button class="modal-close-btn" onclick="document.getElementById('qrModal').remove()">✕</button>
       
       <div style="font-size:32px;margin-bottom:6px">📱</div>
-      <h2 style="font-size:20px;color:var(--text-main)">Open AeroSense on Your Mobile Phone</h2>
-      <p class="muted" style="font-size:13px;margin:8px 0">Scan this QR code with your iPhone Camera or Android Google Lens to open AeroSense immediately on your mobile device!</p>
+      <h2 style="font-size:20px;color:var(--text-main)">Open AeroSense on Mobile Phone</h2>
+      <p class="muted" style="font-size:12.5px;margin:6px 0">Point your iPhone Camera or Android Google Lens at this QR code to open the app:</p>
 
       <div class="qr-code-wrapper">
         <div id="qrcode"></div>
       </div>
 
-      <div class="qr-url-pill">
-        <span>🔗 ${esc(appUrl)}</span>
-        <button class="btn secondary sm" style="padding:4px 8px;font-size:11px" onclick="copyQrUrl('${esc(appUrl)}')">📋 Copy</button>
+      <div style="margin:10px 0;text-align:left">
+        <label style="font-size:11.5px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:4px">TARGET APP URL / CLOUD LINK:</label>
+        <div style="display:flex;gap:6px">
+          <input id="qrTargetUrlInput" value="${esc(defaultUrl)}" placeholder="https://your-app.onrender.com or http://192.168.x.x:3000" style="font-size:13px;padding:8px 12px">
+          <button class="btn sm" style="padding:8px 14px" onclick="updateModalQrCode()">Update</button>
+        </div>
       </div>
 
-      <div style="margin-top:14px;font-size:12px;color:var(--text-sub);text-align:left;background:var(--bg-app);padding:12px;border-radius:var(--radius-md);border:1px solid var(--border-subtle)">
-        <b>📲 How to Install as a Native Mobile App:</b>
-        <ul style="margin:6px 0 0 16px;line-height:1.5">
-          <li><b>Android (Chrome):</b> Tap the 3 dots <b>⋮</b> → Tap <b>"Add to Home screen"</b> or <b>"Install app"</b>.</li>
-          <li><b>iPhone / iPad (Safari):</b> Tap the Share button <b>⎘</b> → Scroll down and tap <b>"Add to Home Screen"</b> ➕.</li>
-        </ul>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+        ${localIpUrl ? `<button class="preset-chip" onclick="setQrUrl('${esc(localIpUrl)}')">📶 Local Wi-Fi (${esc(localIpUrl)})</button>` : ''}
+        <button class="preset-chip" onclick="setQrUrl(window.location.origin)">💻 Current Browser URL</button>
       </div>
 
-      <div style="margin-top:16px;display:flex;gap:8px">
-        <button class="btn" style="flex:1" onclick="installPwaApp()">📲 Install App Now</button>
+      <div style="font-size:12px;color:var(--text-sub);text-align:left;background:var(--bg-app);padding:12px;border-radius:var(--radius-md);border:1px solid var(--border-subtle)">
+        <b>💡 Why might Local Wi-Fi take long or timeout?</b>
+        <div style="margin-top:4px;line-height:1.5;color:var(--text-muted)">
+          • Some Wi-Fi routers (Campus/Office/Hotspot) have <i>AP Client Isolation</i> enabled, blocking phones from reaching the laptop directly.<br>
+          • <b>Solution:</b> Deploy on <b><a href="https://render.com" target="_blank" style="font-weight:700">Render (Free)</a></b> or run <code>npm run tunnel</code> in your terminal to get an instant worldwide HTTPS URL!
+        </div>
+      </div>
+
+      <div style="margin-top:14px;display:flex;gap:8px">
+        <button class="btn" style="flex:1" onclick="installPwaApp()">📲 Install App on Phone</button>
         <button class="btn secondary" onclick="document.getElementById('qrModal').remove()">Close</button>
       </div>
     </div>
   `;
 
   document.body.appendChild(modal);
+  renderModalQr(defaultUrl);
+}
 
-  // Generate QR Code with QRCode.js
+function renderModalQr(url) {
+  const qrContainer = document.getElementById('qrcode');
+  if (!qrContainer) return;
+  qrContainer.innerHTML = '';
   if (window.QRCode) {
-    new QRCode(document.getElementById('qrcode'), {
-      text: appUrl,
+    qrCodeInstance = new QRCode(qrContainer, {
+      text: url,
       width: 180,
       height: 180,
       colorDark: '#0284c7',
       colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
+      correctLevel: QRCode.CorrectLevel.M
     });
   } else {
-    document.getElementById('qrcode').innerHTML = `<p class="muted">Scan: ${esc(appUrl)}</p>`;
+    qrContainer.innerHTML = `<p class="muted" style="word-break:break-all">${esc(url)}</p>`;
   }
 }
+
+window.setQrUrl = function(url) {
+  const input = document.getElementById('qrTargetUrlInput');
+  if (input) input.value = url;
+  renderModalQr(url);
+  toast(`QR Code updated for: ${url}`, 'info');
+};
+
+window.updateModalQrCode = function() {
+  const input = document.getElementById('qrTargetUrlInput');
+  if (input && input.value.trim()) {
+    renderModalQr(input.value.trim());
+    toast('QR Code updated!', 'success');
+  }
+};
 
 window.copyQrUrl = function(url) {
   navigator.clipboard.writeText(url).then(() => {
@@ -2020,11 +2055,12 @@ window.installPwaApp = async function() {
     }
     deferredPrompt = null;
   } else {
-    toast('To install: In your browser menu, tap "Add to Home Screen" or "Install AeroSense"!', 'info');
+    toast('To install: In your phone browser, tap the Share/Menu button ➔ "Add to Home Screen"!', 'info');
   }
 };
 
 window.showQrCodeModal = showQrCodeModal;
+
 
 // Global Export bindings
 window.go = go;

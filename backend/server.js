@@ -837,4 +837,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.listen(PORT, () => console.log(`AeroSense running at http://localhost:${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`AeroSense server active on http://0.0.0.0:${PORT}`);
+  console.log(`Local Access: http://localhost:${PORT}`);
+});
