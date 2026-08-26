@@ -1,0 +1,3337 @@
+[
+  {
+    "id": "TC-001",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-002",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-003",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-004",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-005",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-006",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-007",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-008",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-009",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-010",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-011",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-012",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-013",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-014",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-015",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-016",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-017",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-018",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-019",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-020",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-021",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-022",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-023",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-024",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-025",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-026",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-027",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-028",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-029",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-030",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-031",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-032",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-033",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-034",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-035",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-036",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-037",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-038",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-039",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-040",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-041",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-042",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-043",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-044",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-045",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-046",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-047",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-048",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-049",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-050",
+    "category": "health",
+    "method": "GET",
+    "path": "/api/health",
+    "expectStatus": 200,
+    "expectKey": "ok"
+  },
+  {
+    "id": "TC-051",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 1",
+      "email": "test1@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-052",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 2",
+      "email": "test2@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-053",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 3",
+      "email": "test3@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-054",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 4",
+      "email": "test4@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-055",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 5",
+      "email": "test5@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-056",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 6",
+      "email": "test6@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-057",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 7",
+      "email": "test7@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-058",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 8",
+      "email": "test8@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-059",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 9",
+      "email": "test9@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-060",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 10",
+      "email": "test10@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-061",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 11",
+      "email": "test11@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-062",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 12",
+      "email": "test12@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-063",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 13",
+      "email": "test13@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-064",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 14",
+      "email": "test14@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-065",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 15",
+      "email": "test15@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-066",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 16",
+      "email": "test16@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-067",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 17",
+      "email": "test17@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-068",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 18",
+      "email": "test18@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-069",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 19",
+      "email": "test19@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-070",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 20",
+      "email": "test20@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-071",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 21",
+      "email": "test21@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-072",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 22",
+      "email": "test22@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-073",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 23",
+      "email": "test23@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-074",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 24",
+      "email": "test24@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-075",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 25",
+      "email": "test25@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-076",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 26",
+      "email": "test26@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-077",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 27",
+      "email": "test27@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-078",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 28",
+      "email": "test28@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-079",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 29",
+      "email": "test29@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-080",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 30",
+      "email": "test30@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-081",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 31",
+      "email": "test31@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-082",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 32",
+      "email": "test32@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-083",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 33",
+      "email": "test33@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-084",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 34",
+      "email": "test34@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-085",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 35",
+      "email": "test35@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-086",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 36",
+      "email": "test36@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-087",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 37",
+      "email": "test37@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-088",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 38",
+      "email": "test38@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-089",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 39",
+      "email": "test39@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-090",
+    "category": "registration",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "Test User 40",
+      "email": "test40@aerosense.local",
+      "password": "TestPass123!",
+      "role": "user"
+    },
+    "expectStatus": 201,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-091",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad91@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-092",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad92@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-093",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad93@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-094",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad94@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-095",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad95@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-096",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad96@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-097",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad97@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-098",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad98@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-099",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad99@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-100",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad100@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-101",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad101@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-102",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad102@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-103",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad103@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-104",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad104@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-105",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad105@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-106",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad106@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-107",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad107@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-108",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad108@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-109",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad109@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-110",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "",
+      "email": "bad110@local",
+      "password": "short"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-111",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad111@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-112",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad112@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-113",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad113@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-114",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad114@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-115",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad115@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-116",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad116@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-117",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad117@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-118",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad118@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-119",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad119@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-120",
+    "category": "validation",
+    "method": "POST",
+    "path": "/api/auth/register",
+    "body": {
+      "name": "X",
+      "email": "bad120@local",
+      "password": "1234567"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-121",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-122",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/profile",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-123",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/settings",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-124",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/family",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-125",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/notifications",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-126",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/tracking/family",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-127",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/expert/cases",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-128",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-129",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/profile",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-130",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/settings",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-131",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/family",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-132",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/notifications",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-133",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/tracking/family",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-134",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/expert/cases",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-135",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-136",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/profile",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-137",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/settings",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-138",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/family",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-139",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/notifications",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-140",
+    "category": "auth",
+    "method": "GET",
+    "path": "/api/tracking/family",
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-141",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope141@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-142",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope142@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-143",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope143@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-144",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope144@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-145",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope145@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-146",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope146@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-147",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope147@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-148",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope148@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-149",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope149@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-150",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope150@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-151",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope151@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-152",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope152@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-153",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope153@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-154",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope154@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-155",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope155@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-156",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope156@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-157",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope157@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-158",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope158@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-159",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope159@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-160",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "nope160@aerosense.local",
+      "password": "WrongPass123!"
+    },
+    "expectStatus": 401,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-161",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test1@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-162",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test2@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-163",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test3@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-164",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test4@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-165",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test5@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-166",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test6@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-167",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test7@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-168",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test8@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-169",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test9@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-170",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test10@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-171",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test11@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-172",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test12@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-173",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test13@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-174",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test14@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-175",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test15@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-176",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test16@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-177",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test17@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-178",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test18@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-179",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test19@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-180",
+    "category": "login",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "body": {
+      "email": "test20@aerosense.local",
+      "password": "TestPass123!"
+    },
+    "expectStatus": 200,
+    "expectKey": "token"
+  },
+  {
+    "id": "TC-181",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-182",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-183",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-184",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-185",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-186",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-187",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-188",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-189",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-190",
+    "category": "profile",
+    "method": "GET",
+    "path": "/api/profile",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-191",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-192",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-193",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-194",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-195",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-196",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-197",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-198",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-199",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-200",
+    "category": "settings",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": true,
+      "locationSharing": false
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-201",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 201",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-202",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 202",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-203",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 203",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-204",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 204",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-205",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 205",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-206",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 206",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-207",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 207",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-208",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 208",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-209",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 209",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-210",
+    "category": "profile-update",
+    "method": "PUT",
+    "path": "/api/profile",
+    "auth": true,
+    "body": {
+      "name": "Updated 210",
+      "phone": "0000000000"
+    },
+    "expectStatus": 200,
+    "expectKey": "user"
+  },
+  {
+    "id": "TC-211",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-212",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-213",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-214",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-215",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-216",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-217",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-218",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-219",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-220",
+    "category": "settings-update",
+    "method": "PUT",
+    "path": "/api/settings",
+    "auth": true,
+    "body": {
+      "notifications": false,
+      "locationSharing": true
+    },
+    "expectStatus": 200,
+    "expectKey": "settings"
+  },
+  {
+    "id": "TC-221",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing221@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-222",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing222@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-223",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing223@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-224",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing224@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-225",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing225@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-226",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing226@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-227",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing227@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-228",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing228@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-229",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing229@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-230",
+    "category": "family-validation",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "missing230@aerosense.local"
+    },
+    "expectStatus": 404,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-231",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-232",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-233",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-234",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-235",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-236",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-237",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-238",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-239",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-240",
+    "category": "family-self",
+    "method": "POST",
+    "path": "/api/family/request",
+    "auth": true,
+    "body": {
+      "email": "test1@aerosense.local"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-241",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-242",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-243",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-244",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-245",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-246",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-247",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-248",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-249",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-250",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {
+      "lat": "bad",
+      "lon": "bad"
+    },
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-251",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-252",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-253",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-254",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-255",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-256",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-257",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-258",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-259",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-260",
+    "category": "location-validation",
+    "method": "POST",
+    "path": "/api/tracking/location",
+    "auth": true,
+    "body": {},
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-261",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/atmosphere",
+    "auth": false,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-262",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/atmosphere",
+    "auth": false,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-263",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/atmosphere",
+    "auth": false,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-264",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/atmosphere",
+    "auth": false,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-265",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/atmosphere",
+    "auth": false,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-266",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/hospitals",
+    "auth": false,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-267",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/hospitals",
+    "auth": false,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-268",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/hospitals",
+    "auth": false,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-269",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/hospitals",
+    "auth": false,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-270",
+    "category": "geo-validation",
+    "method": "GET",
+    "path": "/api/risk",
+    "auth": true,
+    "expectStatus": 400,
+    "expectKey": "error"
+  },
+  {
+    "id": "TC-271",
+    "category": "notifications",
+    "method": "GET",
+    "path": "/api/notifications",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "items"
+  },
+  {
+    "id": "TC-272",
+    "category": "notifications",
+    "method": "GET",
+    "path": "/api/notifications",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "items"
+  },
+  {
+    "id": "TC-273",
+    "category": "notifications",
+    "method": "GET",
+    "path": "/api/notifications",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "items"
+  },
+  {
+    "id": "TC-274",
+    "category": "notifications",
+    "method": "GET",
+    "path": "/api/notifications",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "items"
+  },
+  {
+    "id": "TC-275",
+    "category": "notifications",
+    "method": "GET",
+    "path": "/api/notifications",
+    "auth": true,
+    "expectStatus": 200,
+    "expectKey": "items"
+  },
+  {
+    "id": "TC-276",
+    "category": "notifications",
+    "method": "POST",
+    "path": "/api/notifications",
+    "auth": true,
+    "body": {
+      "title": "Test alert 276",
+      "message": "Test notification",
+      "severity": "info"
+    },
+    "expectStatus": 201,
+    "expectKey": "id"
+  },
+  {
+    "id": "TC-277",
+    "category": "notifications",
+    "method": "POST",
+    "path": "/api/notifications",
+    "auth": true,
+    "body": {
+      "title": "Test alert 277",
+      "message": "Test notification",
+      "severity": "info"
+    },
+    "expectStatus": 201,
+    "expectKey": "id"
+  },
+  {
+    "id": "TC-278",
+    "category": "notifications",
+    "method": "POST",
+    "path": "/api/notifications",
+    "auth": true,
+    "body": {
+      "title": "Test alert 278",
+      "message": "Test notification",
+      "severity": "info"
+    },
+    "expectStatus": 201,
+    "expectKey": "id"
+  },
+  {
+    "id": "TC-279",
+    "category": "notifications",
+    "method": "POST",
+    "path": "/api/notifications",
+    "auth": true,
+    "body": {
+      "title": "Test alert 279",
+      "message": "Test notification",
+      "severity": "info"
+    },
+    "expectStatus": 201,
+    "expectKey": "id"
+  },
+  {
+    "id": "TC-280",
+    "category": "notifications",
+    "method": "POST",
+    "path": "/api/notifications",
+    "auth": true,
+    "body": {
+      "title": "Test alert 280",
+      "message": "Test notification",
+      "severity": "info"
+    },
+    "expectStatus": 201,
+    "expectKey": "id"
+  },
+  {
+    "id": "TC-281",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-282",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/login",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-283",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/register",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-284",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/profile",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-285",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/settings",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-286",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/family",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-287",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/tracking",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-288",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/disease",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-289",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/precautions",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-290",
+    "category": "frontend",
+    "method": "GET",
+    "path": "/notifications",
+    "expectStatus": 200,
+    "expectText": "AeroSense"
+  },
+  {
+    "id": "TC-291",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/who/outbreaks",
+    "auth": false,
+    "expectStatus": [
+      200,
+      503
+    ]
+  },
+  {
+    "id": "TC-292",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/who/indicators",
+    "auth": false,
+    "expectStatus": [
+      200,
+      503
+    ]
+  },
+  {
+    "id": "TC-293",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/atmosphere?lat=13.0827&lon=80.2707",
+    "auth": false,
+    "expectStatus": [
+      200,
+      503
+    ]
+  },
+  {
+    "id": "TC-294",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/hospitals?lat=13.0827&lon=80.2707",
+    "auth": false,
+    "expectStatus": [
+      200,
+      503
+    ]
+  },
+  {
+    "id": "TC-295",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/risk?lat=13.0827&lon=80.2707",
+    "auth": true,
+    "expectStatus": [
+      200,
+      503
+    ]
+  },
+  {
+    "id": "TC-296",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/who/outbreaks",
+    "auth": true,
+    "expectStatus": [
+      200,
+      503
+    ]
+  },
+  {
+    "id": "TC-297",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/who/indicators",
+    "auth": true,
+    "expectStatus": [
+      200,
+      503
+    ]
+  },
+  {
+    "id": "TC-298",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/atmosphere?lat=12.9716&lon=77.5946",
+    "auth": true,
+    "expectStatus": [
+      200,
+      503
+    ]
+  },
+  {
+    "id": "TC-299",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/hospitals?lat=12.9716&lon=77.5946",
+    "auth": true,
+    "expectStatus": [
+      200,
+      503
+    ]
+  },
+  {
+    "id": "TC-300",
+    "category": "live-source",
+    "method": "GET",
+    "path": "/api/risk?lat=12.9716&lon=77.5946",
+    "auth": true,
+    "expectStatus": [
+      200,
+      503
+    ]
+  }
+]

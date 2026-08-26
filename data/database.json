@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "id": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "name": "Maithreyee",
+      "email": "maithreyee1104@gmail.com",
+      "passwordHash": "$2b$10$ELDy2qDwUDbF5UJNB/D29O2CGWeMNR36Nnm3LHex4iAB.dAG0u6qK",
+      "role": "user",
+      "phone": "6379103565",
+      "healthProfile": {},
+      "settings": {
+        "notifications": true,
+        "locationSharing": false,
+        "theme": "blue-white"
+      }
+    }
+  ],
+  "familyRequests": [],
+  "notifications": [],
+  "locations": []
+}
