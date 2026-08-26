@@ -69,13 +69,23 @@ function toggleMobileSidebar() {
   if (backdrop) backdrop.classList.toggle('open', isSidebarOpen);
 }
 
-function speakCurrentAdvisory() {
+let isSpeakingVoice = false;
+
+function toggleVoiceAdvisory() {
   if (!('speechSynthesis' in window)) {
     toast('Voice speech is not supported in this browser.', 'warn');
     return;
   }
-  window.speechSynthesis.cancel();
 
+  if (window.speechSynthesis.speaking || isSpeakingVoice) {
+    window.speechSynthesis.cancel();
+    isSpeakingVoice = false;
+    updateVoiceButtons(false);
+    toast('🔇 Voice safety briefing stopped.', 'info');
+    return;
+  }
+
+  window.speechSynthesis.cancel();
   const place = currentSearchedPlace?.name || 'your location';
   const score = lastTelemetryData?.risk?.score ?? 35;
   const level = lastTelemetryData?.risk?.level ?? 'moderate';
@@ -87,9 +97,42 @@ function speakCurrentAdvisory() {
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.rate = 1.0;
   utterance.pitch = 1.05;
+
+  utterance.onend = () => {
+    isSpeakingVoice = false;
+    updateVoiceButtons(false);
+  };
+  utterance.onerror = () => {
+    isSpeakingVoice = false;
+    updateVoiceButtons(false);
+  };
+
+  isSpeakingVoice = true;
   window.speechSynthesis.speak(utterance);
-  toast('🔊 Playing spoken respiratory safety briefing...', 'info');
+  updateVoiceButtons(true);
+  toast('🔊 Playing voice safety briefing (click again to stop)', 'info');
 }
+
+function updateVoiceButtons(playing) {
+  const btns = document.querySelectorAll('.voice-advisory-btn');
+  btns.forEach(b => {
+    if (playing) {
+      b.innerHTML = '⏹ Stop Voice';
+      b.classList.add('playing');
+    } else {
+      b.innerHTML = '🔊 Voice Safety';
+      b.classList.remove('playing');
+    }
+  });
+  const sidebarBtn = document.getElementById('sidebarVoiceBtn');
+  if (sidebarBtn) {
+    sidebarBtn.innerHTML = playing ? '⏹' : '🔊';
+    sidebarBtn.title = playing ? 'Stop Voice Briefing' : 'Listen to Voice Briefing';
+  }
+}
+
+window.speakCurrentAdvisory = toggleVoiceAdvisory;
+window.toggleVoiceAdvisory = toggleVoiceAdvisory;
 
 // ============================================================================
 // Professional Left-Sidebar Layout
@@ -826,8 +869,50 @@ async function loadFamilyPinsOnMap(leafletMap) {
         listEl.appendChild(itemEl);
       }
     }
+
+    // Render Registered Kids School Locations
+    if (d.kids && d.kids.length) {
+      for (const kid of d.kids) {
+        let kRisk = { score: 35, level: 'low' };
+        try {
+          const atmo = await api(`/atmosphere?lat=${kid.lat}&lon=${kid.lon}`);
+          if (atmo.risk) kRisk = atmo.risk;
+        } catch {}
+
+        const schoolIcon = L.divIcon({
+          className: 'school-pin-wrapper',
+          html: `
+            <div class="family-map-pin ${kRisk.level==='high'?'high-risk':kRisk.level==='moderate'?'mod-risk':'low-risk'}" style="border-color:#10b981" title="${esc(kid.name)}'s School (${esc(kid.schoolName)})">
+              <div class="family-pin-avatar" style="background:#10b981">🎒</div>
+              <span>${esc(kid.name)}'s School</span>
+              <span class="family-pin-badge ${kRisk.level==='high'?'high':kRisk.level==='moderate'?'mod':'low'}">${kRisk.score}</span>
+            </div>
+          `,
+          iconSize: [140, 32],
+          iconAnchor: [70, 16]
+        });
+
+        const sMarker = L.marker([kid.lat, kid.lon], { icon: schoolIcon }).addTo(leafletMap);
+        sMarker.bindPopup(`
+          <div style="font-family:var(--font-body);padding:6px">
+            <div style="font-weight:800;font-size:15px;color:#10b981">🎒 ${esc(kid.name)} • ${esc(kid.schoolName)}</div>
+            <div class="muted" style="font-size:12px">Grade: ${esc(kid.grade || 'N/A')} • Age: ${kid.age || 'N/A'}</div>
+            ${kid.allergies?.length ? `<div style="font-size:11.5px;color:var(--danger);margin:4px 0">⚠️ Sensitivities: ${esc(kid.allergies.join(', '))}</div>` : ''}
+            <div style="margin:8px 0;padding:6px 10px;border-radius:8px;background:${kRisk.level==='high'?'#fee2e2':kRisk.level==='moderate'?'#fef3c7':'#dcfce7'}">
+              <b>School Air Exposure: ${kRisk.score}/100</b> (${kRisk.level.toUpperCase()})
+            </div>
+            <button class="btn sm" style="width:100%;background:#10b981" onclick="flyToFamilyMember(${kid.lat}, ${kid.lon}, '${esc(kid.name)}')">
+              🎯 Zoom to ${esc(kid.name)}'s School
+            </button>
+          </div>
+        `);
+
+        familyMarkers.set(kid.name, sMarker);
+      }
+    }
   } catch {}
 }
+
 
 // ============================================================================
 // Global Tracking & City AQI Explorer
@@ -1431,39 +1516,83 @@ function precautions() {
 }
 
 // ============================================================================
-// Family Network & SMS History
+// Family Network, Kids School Safe Zones & SMS Radar
 // ============================================================================
 async function family() {
   layout(`
     <div class="grid">
-      <div class="card span-5">
-        <h1>Connect Family Members</h1>
-        <p class="muted">Enter a family member's registered email address to share mutual location telemetry and automated emergency SMS alerts.</p>
-        <form id="familyForm" style="margin-top:16px">
+      <!-- Column 1: Connect Family & Emergency SOS -->
+      <div class="card span-4">
+        <h2>Connect Family Member</h2>
+        <p class="muted" style="font-size:12.5px;margin-bottom:12px">Enter a family member's registered email to share mutual location telemetry and automated emergency SMS alerts.</p>
+        <form id="familyForm">
           <div class="field">
-            <label>Family Member's Registered Email</label>
+            <label>Registered Email</label>
             <input id="familyEmail" type="email" placeholder="relative@example.com" required>
           </div>
           <button class="btn" style="width:100%">Send Connection Request</button>
         </form>
-        <p id="familyMsg" style="margin-top:12px"></p>
+        <p id="familyMsg" style="margin-top:10px"></p>
 
-        <hr style="border:0;border-top:1px solid var(--border-subtle);margin:20px 0">
-        <h3>Emergency SMS Broadcast Trigger</h3>
-        <p class="muted" style="font-size:12.5px;margin-bottom:12px">Test sending an urgent family SMS alert to all registered family phone numbers:</p>
-        <button class="btn sm" style="width:100%;background:var(--accent-family)" onclick="triggerEmergencySOS()">🚨 Test Family Emergency SMS Dispatch</button>
+        <hr style="border:0;border-top:1px solid var(--border-subtle);margin:18px 0">
+        <h3>Emergency SMS Panic Trigger</h3>
+        <p class="muted" style="font-size:12px;margin-bottom:10px">Broadcast an instant emergency panic SMS alert to all family phone numbers:</p>
+        <button class="sos-button" style="width:100%" onclick="triggerEmergencySOS()">🚨 Dispatch Family Emergency SOS</button>
       </div>
 
-      <div class="card span-7">
+      <!-- Column 2: Connected Family Members & SMS History -->
+      <div class="card span-4">
         <h2>Connected Family Members</h2>
-        <div id="familyList" class="list" style="margin-top:14px">
+        <div id="familyList" class="list" style="margin-top:12px">
           <div class="muted">Loading connections…</div>
         </div>
 
-        <h3 style="margin-top:24px">📱 Dispatched Family SMS Emergency Logs</h3>
-        <p class="muted" style="font-size:12.5px;margin-bottom:10px">History of SMS alerts transmitted through the emergency gateway:</p>
-        <div id="smsAlertList" class="list" style="max-height:220px;overflow-y:auto">
+        <h3 style="margin-top:20px">📱 Dispatched SMS Logs</h3>
+        <div id="smsAlertList" class="list" style="max-height:180px;overflow-y:auto;margin-top:8px">
           <div class="muted">Loading SMS logs…</div>
+        </div>
+      </div>
+
+      <!-- Column 3: NEW Kids & School Safe Zones -->
+      <div class="card span-4">
+        <h2>🎒 Kids & School Safe Zones</h2>
+        <p class="muted" style="font-size:12.5px;margin-bottom:12px">Track real-time air quality & pollution risks at your children's schools during school hours.</p>
+
+        <form id="kidForm" style="margin-bottom:16px;background:var(--bg-app);padding:14px;border-radius:var(--radius-md);border:1px solid var(--border-subtle)">
+          <div class="field">
+            <label>Child's Full Name</label>
+            <input id="kidName" placeholder="e.g. Liam Doe" required>
+          </div>
+          <div class="field">
+            <label>School Name</label>
+            <input id="kidSchool" placeholder="e.g. St. Xavier's Academy" required>
+          </div>
+          <div class="row">
+            <div class="field" style="flex:1">
+              <label>School Latitude</label>
+              <input id="kidLat" type="number" step="any" placeholder="28.6139" required>
+            </div>
+            <div class="field" style="flex:1">
+              <label>School Longitude</label>
+              <input id="kidLon" type="number" step="any" placeholder="77.2090" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field" style="flex:1">
+              <label>Age / Grade</label>
+              <input id="kidGrade" placeholder="e.g. 8 yrs • 3rd Grade">
+            </div>
+            <div class="field" style="flex:1">
+              <label>Sensitivities</label>
+              <input id="kidAllergies" placeholder="e.g. Asthma, Pollen">
+            </div>
+          </div>
+          <button class="btn sm" style="width:100%;background:var(--ok)">+ Register School Safe Zone</button>
+        </form>
+
+        <h3>Tracked Children</h3>
+        <div id="kidsList" class="list" style="margin-top:8px;max-height:220px;overflow-y:auto">
+          <div class="muted">Loading kids school profiles…</div>
         </div>
       </div>
     </div>
@@ -1487,6 +1616,38 @@ async function family() {
     }
   };
 
+  const kidForm = document.getElementById('kidForm');
+  if (kidForm) {
+    // Prefill coordinates with user's current city/coordinates
+    document.getElementById('kidLat').value = userLat || 28.6139;
+    document.getElementById('kidLon').value = userLon || 77.2090;
+
+    kidForm.onsubmit = async e => {
+      e.preventDefault();
+      try {
+        const name = document.getElementById('kidName').value;
+        const schoolName = document.getElementById('kidSchool').value;
+        const lat = Number(document.getElementById('kidLat').value);
+        const lon = Number(document.getElementById('kidLon').value);
+        const grade = document.getElementById('kidGrade').value;
+        const allergies = document.getElementById('kidAllergies').value;
+
+        await api('/family/kids', {
+          method: 'POST',
+          body: JSON.stringify({ name, schoolName, lat, lon, grade, allergies })
+        });
+        toast(`🎒 ${name}'s school safe zone registered!`, 'success');
+        document.getElementById('kidName').value = '';
+        document.getElementById('kidSchool').value = '';
+        document.getElementById('kidGrade').value = '';
+        document.getElementById('kidAllergies').value = '';
+        refreshFamily();
+      } catch (err) {
+        toast(err.message, 'error');
+      }
+    };
+  }
+
   refreshFamily();
   loadSmsAlerts();
 }
@@ -1495,51 +1656,97 @@ async function refreshFamily() {
   try {
     const d = await api('/family');
     const list = document.getElementById('familyList');
-    if (!list) return;
+    const kidsList = document.getElementById('kidsList');
 
-    if (!d.connections.length) {
-      list.innerHTML = '<div class="muted">No family connections yet. Invite your family members using their registered email above!</div>';
-      return;
+    if (list) {
+      if (!d.connections || !d.connections.length) {
+        list.innerHTML = '<div class="muted">No family connections yet. Invite family members using their registered email!</div>';
+      } else {
+        list.innerHTML = d.connections.map(x => {
+          const otherName = esc(x.other?.name || 'User');
+          const otherEmail = esc(x.other?.email || '');
+          const otherPhone = x.other?.phone ? esc(x.other.phone) : 'No phone listed';
+          const isAccepted = x.status === 'accepted';
+          const isIncoming = x.status === 'pending' && x.to === me.id;
+
+          const loc = x.location || { lat: 28.6139, lon: 77.2090 };
+
+          return `
+            <div class="listitem">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div>
+                  <div style="font-weight:700;font-size:14px;color:var(--text-main)">👨‍👩‍👧 ${otherName}</div>
+                  <div class="muted" style="font-size:12px">${otherEmail} • 📱 ${otherPhone}</div>
+                </div>
+                <span class="pill ${isAccepted?'low':'moderate'}">${esc(x.status)}</span>
+              </div>
+              <div style="margin-top:8px;font-size:12px;color:var(--text-sub)">
+                📍 <b>Location:</b> ${loc.lat.toFixed(3)}, ${loc.lon.toFixed(3)}
+                <button class="btn sm secondary" style="margin-left:8px;padding:3px 8px;font-size:11px" onclick="go('tracking')">🗺️ View on Map</button>
+              </div>
+              ${isIncoming ? `
+                <div style="margin-top:10px;display:flex;gap:6px">
+                  <button class="btn sm" onclick="respond('${x.id}', true)">Accept Connection</button>
+                  <button class="btn sm secondary" onclick="respond('${x.id}', false)">Decline</button>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }).join('');
+      }
     }
 
-    list.innerHTML = d.connections.map(x => {
-      const otherName = esc(x.other?.name || 'User');
-      const otherEmail = esc(x.other?.email || '');
-      const otherPhone = x.other?.phone ? esc(x.other.phone) : 'No phone listed';
-      const isAccepted = x.status === 'accepted';
-      const isIncoming = x.status === 'pending' && x.to === me.id;
+    if (kidsList) {
+      if (!d.kids || !d.kids.length) {
+        kidsList.innerHTML = '<div class="muted">No kids registered yet. Add your child and school coordinates above to monitor their school air quality.</div>';
+      } else {
+        kidsList.innerHTML = '';
+        for (const kid of d.kids) {
+          let kRisk = { score: 35, level: 'low' };
+          try {
+            const atmo = await api(`/atmosphere?lat=${kid.lat}&lon=${kid.lon}`);
+            if (atmo.risk) kRisk = atmo.risk;
+          } catch {}
 
-      return `
-        <div class="listitem">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div style="font-weight:700;font-size:15px;color:var(--text-main)">${otherName}</div>
-              <div class="muted" style="font-size:12.5px">${otherEmail} • 📱 ${otherPhone}</div>
+          const itemEl = document.createElement('div');
+          itemEl.className = 'listitem';
+          itemEl.innerHTML = `
+            <div style="display:flex;justify-content:space-between;align-items:flex-start">
+              <div>
+                <div style="font-weight:700;font-size:14px;color:#10b981">🎒 ${esc(kid.name)}</div>
+                <div class="muted" style="font-size:12px">🏫 ${esc(kid.schoolName)} (${kid.grade || 'Student'})</div>
+              </div>
+              <span class="pill ${kRisk.level==='high'?'high':kRisk.level==='moderate'?'moderate':'low'}" style="font-size:10.5px">Risk: ${kRisk.score}/100</span>
             </div>
-            <span class="pill ${isAccepted?'low':'moderate'}">${esc(x.status)}</span>
-          </div>
-          ${x.location ? `
-            <div style="margin-top:10px;font-size:12.5px;color:var(--text-sub)">
-              📍 <b>Live Location:</b> ${x.location.lat.toFixed(4)}, ${x.location.lon.toFixed(4)}
-              <a href="javascript:go('tracking')" style="margin-left:8px;font-weight:600">View on Map →</a>
+            ${kid.allergies?.length ? `<div style="font-size:11px;color:var(--warn);margin-top:4px">⚠️ Sensitivities: ${esc(kid.allergies.join(', '))}</div>` : ''}
+            <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+              <span class="muted" style="font-size:11px">📍 [${kid.lat.toFixed(3)}, ${kid.lon.toFixed(3)}]</span>
+              <div style="display:flex;gap:6px">
+                <button class="btn sm secondary" style="padding:3px 8px;font-size:11px" onclick="go('tracking')">🗺️ Map</button>
+                <button class="btn sm secondary" style="padding:3px 8px;font-size:11px;color:var(--danger)" onclick="removeKidProfile('${kid.id}')">🗑️</button>
+              </div>
             </div>
-          ` : `
-            <div class="muted" style="margin-top:8px;font-size:12px">Location sharing standby</div>
-          `}
-          ${isIncoming ? `
-            <div style="margin-top:12px">
-              <button class="btn sm" onclick="respond('${x.id}', true)">Accept Connection</button>
-              <button class="btn sm secondary" onclick="respond('${x.id}', false)">Decline</button>
-            </div>
-          ` : ''}
-        </div>
-      `;
-    }).join('');
+          `;
+          kidsList.appendChild(itemEl);
+        }
+      }
+    }
   } catch (e) {
     const list = document.getElementById('familyList');
     if (list) list.innerHTML = `<div class="error">${esc(e.message)}</div>`;
   }
 }
+
+window.removeKidProfile = async function(id) {
+  if (!confirm('Remove this child school safe zone?')) return;
+  try {
+    await api(`/family/kids/${id}`, { method: 'DELETE' });
+    toast('Kid school profile removed', 'info');
+    refreshFamily();
+  } catch (e) {
+    toast(e.message, 'error');
+  }
+};
 
 async function loadSmsAlerts() {
   const box = document.getElementById('smsAlertList');
@@ -1564,6 +1771,7 @@ async function loadSmsAlerts() {
     box.innerHTML = '<div class="muted">SMS logs not loaded.</div>';
   }
 }
+
 
 async function respond(id, accept) {
   try {

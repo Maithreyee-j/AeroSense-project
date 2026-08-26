@@ -12,6 +12,7 @@ export const familyRequests = [];
 export const notifications = [];
 export const locations = new Map();
 export const smsAlerts = [];
+export const kidsProfiles = [];
 
 function initDb() {
   if (isMemory) return;
@@ -41,6 +42,9 @@ function initDb() {
         if (Array.isArray(data.smsAlerts)) {
           smsAlerts.push(...data.smsAlerts);
         }
+        if (Array.isArray(data.kidsProfiles)) {
+          kidsProfiles.push(...data.kidsProfiles);
+        }
         if (Array.isArray(data.locations)) {
           for (const l of data.locations) {
             if (l.userId) locations.set(l.userId, l);
@@ -67,6 +71,7 @@ export function saveDb() {
       familyRequests,
       notifications,
       smsAlerts: smsAlerts.slice(-100),
+      kidsProfiles,
       locations: Array.from(locations.entries()).map(([userId, loc]) => ({ userId, ...loc }))
     };
 

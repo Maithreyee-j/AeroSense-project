@@ -19,7 +19,7 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-import { users, familyRequests, notifications, locations, smsAlerts, saveDb } from './db.js';
+import { users, familyRequests, notifications, locations, smsAlerts, kidsProfiles, saveDb } from './db.js';
 
 function safeUser(u) {
   return {
@@ -185,13 +185,24 @@ app.get('/api/family', auth, (req, res) => {
       location: other ? locations.get(other.id) || null : null
     };
   });
-  res.json({ connections: result });
+  const myKids = kidsProfiles.filter(k => k.parentId === req.user.id);
+  res.json({ connections: result, kids: myKids });
 });
 
 app.post('/api/family/:requestId/respond', auth, (req, res) => {
   const r = familyRequests.find(x => x.id === req.params.requestId && x.to === req.user.id);
   if (!r) return res.status(404).json({ error: 'Request not found' });
-  r.status = req.body?.accept ? 'accepted' : 'declined';
+  const accepted = Boolean(req.body?.accept);
+  r.status = accepted ? 'accepted' : 'declined';
+
+  if (accepted) {
+    // Auto-enable location sharing between accepted family members
+    const responder = [...users.values()].find(u => u.id === req.user.id);
+    const requester = [...users.values()].find(u => u.id === r.from);
+    if (responder && responder.settings) responder.settings.locationSharing = true;
+    if (requester && requester.settings) requester.settings.locationSharing = true;
+  }
+
   saveDb();
   res.json({ request: r });
 });
@@ -202,6 +213,14 @@ app.post('/api/tracking/location', auth, (req, res) => {
     return res.status(400).json({ error: 'Valid latitude and longitude are required' });
   }
   locations.set(req.user.id, { lat, lon, accuracy: Number(accuracy) || null, updatedAt: new Date().toISOString() });
+  
+  // Ensure locationSharing is active when updating location
+  const u = [...users.values()].find(x => x.id === req.user.id);
+  if (u) {
+    if (!u.settings) u.settings = {};
+    if (u.settings.locationSharing === undefined) u.settings.locationSharing = true;
+  }
+
   saveDb();
   res.json({ location: locations.get(req.user.id) });
 });
@@ -210,16 +229,69 @@ app.get('/api/tracking/family', auth, (req, res) => {
   const ids = familyRequests
     .filter(r => r.status === 'accepted' && (r.from === req.user.id || r.to === req.user.id))
     .map(r => (r.from === req.user.id ? r.to : r.from));
-  res.json({
-    locations: ids.map(uid => {
-      const u = [...users.values()].find(x => x.id === uid);
-      return {
-        userId: uid,
-        location: u?.settings?.locationSharing ? locations.get(uid) || null : null,
-        user: safeUser(u)
-      };
-    })
+
+  const familyLocations = ids.map(uid => {
+    const u = [...users.values()].find(x => x.id === uid);
+    let loc = locations.get(uid) || null;
+    
+    // If no live GPS logged yet, provide default fallback location
+    if (!loc) {
+      loc = { lat: 28.6139 + ((uid.charCodeAt(0) % 5) * 0.02 - 0.04), lon: 77.2090 + ((uid.charCodeAt(1) % 5) * 0.02 - 0.04), isFallback: true, updatedAt: new Date().toISOString() };
+    }
+
+    return {
+      userId: uid,
+      location: (u?.settings?.locationSharing !== false) ? loc : null,
+      user: safeUser(u)
+    };
   });
+
+  const myKids = kidsProfiles.filter(k => k.parentId === req.user.id);
+
+  res.json({
+    locations: familyLocations,
+    kids: myKids
+  });
+});
+
+// ============================================================================
+// Kids & School Safe Zone Management Endpoints
+// ============================================================================
+app.get('/api/family/kids', auth, (req, res) => {
+  const myKids = kidsProfiles.filter(k => k.parentId === req.user.id);
+  res.json({ kids: myKids });
+});
+
+app.post('/api/family/kids', auth, (req, res) => {
+  const { name, schoolName, lat, lon, age, grade, allergies } = req.body || {};
+  if (!name || !schoolName) {
+    return res.status(400).json({ error: "Kid's name and school name are required" });
+  }
+
+  const kid = {
+    id: id(),
+    parentId: req.user.id,
+    name: String(name).trim(),
+    schoolName: String(schoolName).trim(),
+    lat: Number(lat) || 28.6139,
+    lon: Number(lon) || 77.2090,
+    age: age ? Number(age) : null,
+    grade: grade ? String(grade) : '',
+    allergies: Array.isArray(allergies) ? allergies : typeof allergies === 'string' ? allergies.split(',').map(s => s.trim()).filter(Boolean) : [],
+    createdAt: new Date().toISOString()
+  };
+
+  kidsProfiles.push(kid);
+  saveDb();
+  res.status(201).json({ kid });
+});
+
+app.delete('/api/family/kids/:kidId', auth, (req, res) => {
+  const idx = kidsProfiles.findIndex(k => k.id === req.params.kidId && k.parentId === req.user.id);
+  if (idx === -1) return res.status(404).json({ error: 'Kid profile not found' });
+  kidsProfiles.splice(idx, 1);
+  saveDb();
+  res.json({ success: true, message: 'Kid school profile removed' });
 });
 
 app.post('/api/family/environment-alert', auth, async (req, res) => {
