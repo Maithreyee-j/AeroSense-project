@@ -1,10 +1,10 @@
-// AeroSense PWA Service Worker v4
-const CACHE_NAME = 'aerosense-v4';
+// AeroSense PWA Service Worker v5
+const CACHE_NAME = 'aerosense-v5';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/styles.css?v=4',
-  '/app.js?v=4',
+  '/styles.css?v=5',
+  '/app.js?v=5',
   '/manifest.json',
   '/icon.png',
   '/favicon.png'

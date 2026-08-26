@@ -283,15 +283,38 @@ app.post('/api/family/kids', auth, (req, res) => {
 
   kidsProfiles.push(kid);
   saveDb();
-  res.status(201).json({ kid });
+  res.status(201).json({ kid, kids: kidsProfiles.filter(k => k.parentId === req.user.id) });
+});
+
+app.post('/api/family/kids/sync', auth, (req, res) => {
+  const incomingKids = Array.isArray(req.body?.kids) ? req.body.kids : [];
+  for (const k of incomingKids) {
+    if (k && k.name && !kidsProfiles.some(existing => existing.id === k.id || (existing.name === k.name && existing.parentId === req.user.id))) {
+      kidsProfiles.push({
+        id: k.id || id(),
+        parentId: req.user.id,
+        name: String(k.name).trim(),
+        schoolName: String(k.schoolName || 'School').trim(),
+        lat: Number(k.lat) || 28.6139,
+        lon: Number(k.lon) || 77.2090,
+        age: k.age ? Number(k.age) : null,
+        grade: k.grade ? String(k.grade) : '',
+        allergies: Array.isArray(k.allergies) ? k.allergies : [],
+        createdAt: k.createdAt || new Date().toISOString()
+      });
+    }
+  }
+  saveDb();
+  res.json({ success: true, kids: kidsProfiles.filter(k => k.parentId === req.user.id) });
 });
 
 app.delete('/api/family/kids/:kidId', auth, (req, res) => {
   const idx = kidsProfiles.findIndex(k => k.id === req.params.kidId && k.parentId === req.user.id);
-  if (idx === -1) return res.status(404).json({ error: 'Kid profile not found' });
-  kidsProfiles.splice(idx, 1);
-  saveDb();
-  res.json({ success: true, message: 'Kid school profile removed' });
+  if (idx !== -1) {
+    kidsProfiles.splice(idx, 1);
+    saveDb();
+  }
+  res.json({ success: true, message: 'Kid school profile removed', kids: kidsProfiles.filter(k => k.parentId === req.user.id) });
 });
 
 app.post('/api/family/environment-alert', auth, async (req, res) => {

@@ -876,8 +876,9 @@ async function loadFamilyPinsOnMap(leafletMap) {
     }
 
     // Render Registered Kids School Locations
-    if (d.kids && d.kids.length) {
-      for (const kid of d.kids) {
+    const kidsListForPins = (d.kids && d.kids.length) ? d.kids : (me ? JSON.parse(localStorage.getItem('aerosense_kids_' + me.id) || '[]') : []);
+    if (kidsListForPins.length) {
+      for (const kid of kidsListForPins) {
         let kRisk = { score: 35, level: 'low' };
         try {
           const atmo = await api(`/atmosphere?lat=${kid.lat}&lon=${kid.lon}`);
@@ -902,7 +903,7 @@ async function loadFamilyPinsOnMap(leafletMap) {
           <div style="font-family:var(--font-body);padding:6px">
             <div style="font-weight:800;font-size:15px;color:#10b981">🎒 ${esc(kid.name)} • ${esc(kid.schoolName)}</div>
             <div class="muted" style="font-size:12px">Grade: ${esc(kid.grade || 'N/A')} • Age: ${kid.age || 'N/A'}</div>
-            ${kid.allergies?.length ? `<div style="font-size:11.5px;color:var(--danger);margin:4px 0">⚠️ Sensitivities: ${esc(kid.allergies.join(', '))}</div>` : ''}
+            ${kid.allergies?.length ? `<div style="font-size:11.5px;color:var(--danger);margin:4px 0">⚠️ Sensitivities: ${esc(Array.isArray(kid.allergies)?kid.allergies.join(', '):kid.allergies)}</div>` : ''}
             <div style="margin:8px 0;padding:6px 10px;border-radius:8px;background:${kRisk.level==='high'?'#fee2e2':kRisk.level==='moderate'?'#fef3c7':'#dcfce7'}">
               <b>School Air Exposure: ${kRisk.score}/100</b> (${kRisk.level.toUpperCase()})
             </div>
@@ -915,6 +916,7 @@ async function loadFamilyPinsOnMap(leafletMap) {
         familyMarkers.set(kid.name, sMarker);
       }
     }
+
   } catch {}
 }
 
@@ -1637,11 +1639,17 @@ async function family() {
         const grade = document.getElementById('kidGrade').value;
         const allergies = document.getElementById('kidAllergies').value;
 
-        await api('/family/kids', {
+        const res = await api('/family/kids', {
           method: 'POST',
           body: JSON.stringify({ name, schoolName, lat, lon, grade, allergies })
         });
-        toast(`🎒 ${name}'s school safe zone registered!`, 'success');
+        
+        // Persist to local backup storage
+        const currentLocal = JSON.parse(localStorage.getItem('aerosense_kids_' + me.id) || '[]');
+        if (res.kid) currentLocal.push(res.kid);
+        localStorage.setItem('aerosense_kids_' + me.id, JSON.stringify(res.kids || currentLocal));
+
+        toast(`🎒 ${name}'s school safe zone saved & synced!`, 'success');
         document.getElementById('kidName').value = '';
         document.getElementById('kidSchool').value = '';
         document.getElementById('kidGrade').value = '';
@@ -1662,6 +1670,24 @@ async function refreshFamily() {
     const d = await api('/family');
     const list = document.getElementById('familyList');
     const kidsList = document.getElementById('kidsList');
+
+    // Auto-restore / merge kids from persistent localStorage if cloud DB is clean
+    let kidsToDisplay = d.kids || [];
+    const localSavedKids = JSON.parse(localStorage.getItem('aerosense_kids_' + me.id) || '[]');
+
+    if (!kidsToDisplay.length && localSavedKids.length) {
+      try {
+        const syncRes = await api('/family/kids/sync', {
+          method: 'POST',
+          body: JSON.stringify({ kids: localSavedKids })
+        });
+        kidsToDisplay = syncRes.kids || localSavedKids;
+      } catch {
+        kidsToDisplay = localSavedKids;
+      }
+    } else if (kidsToDisplay.length) {
+      localStorage.setItem('aerosense_kids_' + me.id, JSON.stringify(kidsToDisplay));
+    }
 
     if (list) {
       if (!d.connections || !d.connections.length) {
@@ -1702,11 +1728,11 @@ async function refreshFamily() {
     }
 
     if (kidsList) {
-      if (!d.kids || !d.kids.length) {
+      if (!kidsToDisplay.length) {
         kidsList.innerHTML = '<div class="muted">No kids registered yet. Add your child and school coordinates above to monitor their school air quality.</div>';
       } else {
         kidsList.innerHTML = '';
-        for (const kid of d.kids) {
+        for (const kid of kidsToDisplay) {
           let kRisk = { score: 35, level: 'low' };
           try {
             const atmo = await api(`/atmosphere?lat=${kid.lat}&lon=${kid.lon}`);
@@ -1723,7 +1749,7 @@ async function refreshFamily() {
               </div>
               <span class="pill ${kRisk.level==='high'?'high':kRisk.level==='moderate'?'moderate':'low'}" style="font-size:10.5px">Risk: ${kRisk.score}/100</span>
             </div>
-            ${kid.allergies?.length ? `<div style="font-size:11px;color:var(--warn);margin-top:4px">⚠️ Sensitivities: ${esc(kid.allergies.join(', '))}</div>` : ''}
+            ${kid.allergies?.length ? `<div style="font-size:11px;color:var(--warn);margin-top:4px">⚠️ Sensitivities: ${esc(Array.isArray(kid.allergies)?kid.allergies.join(', '):kid.allergies)}</div>` : ''}
             <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
               <span class="muted" style="font-size:11px">📍 [${kid.lat.toFixed(3)}, ${kid.lon.toFixed(3)}]</span>
               <div style="display:flex;gap:6px">
@@ -1745,13 +1771,17 @@ async function refreshFamily() {
 window.removeKidProfile = async function(id) {
   if (!confirm('Remove this child school safe zone?')) return;
   try {
-    await api(`/family/kids/${id}`, { method: 'DELETE' });
+    const res = await api(`/family/kids/${id}`, { method: 'DELETE' });
+    const localSaved = JSON.parse(localStorage.getItem('aerosense_kids_' + me.id) || '[]');
+    const updatedLocal = localSaved.filter(k => k.id !== id);
+    localStorage.setItem('aerosense_kids_' + me.id, JSON.stringify(res.kids || updatedLocal));
     toast('Kid school profile removed', 'info');
     refreshFamily();
   } catch (e) {
     toast(e.message, 'error');
   }
 };
+
 
 async function loadSmsAlerts() {
   const box = document.getElementById('smsAlertList');

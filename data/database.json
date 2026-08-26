@@ -10,12 +10,14 @@
       "healthProfile": {},
       "settings": {
         "notifications": true,
-        "locationSharing": false,
+        "locationSharing": true,
         "theme": "blue-white"
       }
     }
   ],
   "familyRequests": [],
   "notifications": [],
+  "smsAlerts": [],
+  "kidsProfiles": [],
   "locations": []
 }
