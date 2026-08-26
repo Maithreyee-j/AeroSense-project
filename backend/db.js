@@ -34,18 +34,23 @@ function initDb() {
           }
         }
         if (Array.isArray(data.familyRequests)) {
+          familyRequests.length = 0;
           familyRequests.push(...data.familyRequests);
         }
         if (Array.isArray(data.notifications)) {
+          notifications.length = 0;
           notifications.push(...data.notifications);
         }
         if (Array.isArray(data.smsAlerts)) {
+          smsAlerts.length = 0;
           smsAlerts.push(...data.smsAlerts);
         }
         if (Array.isArray(data.kidsProfiles)) {
+          kidsProfiles.length = 0;
           kidsProfiles.push(...data.kidsProfiles);
         }
         if (Array.isArray(data.locations)) {
+          locations.clear();
           for (const l of data.locations) {
             if (l.userId) locations.set(l.userId, l);
           }
@@ -75,12 +80,29 @@ export function saveDb() {
       locations: Array.from(locations.entries()).map(([userId, loc]) => ({ userId, ...loc }))
     };
 
-    const tempFile = `${DATA_FILE}.tmp`;
-    fs.writeFileSync(tempFile, JSON.stringify(data, null, 2), 'utf8');
-    fs.renameSync(tempFile, DATA_FILE);
+    const serialized = JSON.stringify(data, null, 2);
+    try {
+      const tempFile = `${DATA_FILE}.tmp`;
+      fs.writeFileSync(tempFile, serialized, 'utf8');
+      fs.renameSync(tempFile, DATA_FILE);
+    } catch {
+      // Direct write fallback if rename is blocked (e.g. Windows file locking or antivirus)
+      fs.writeFileSync(DATA_FILE, serialized, 'utf8');
+    }
   } catch (err) {
     console.error('Error saving database to disk:', err.message);
   }
 }
+
+// Gracefully flush database on process termination
+process.on('exit', () => saveDb());
+process.on('SIGINT', () => {
+  saveDb();
+  process.exit(0);
+});
+process.on('SIGTERM', () => {
+  saveDb();
+  process.exit(0);
+});
 
 initDb();

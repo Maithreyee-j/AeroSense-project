@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "node --watch backend/server.js",
+    "dev": "node --watch --watch-path=backend backend/server.js",
     "tunnel": "npx -y localtunnel --port 3000",
     "test:300": "node tests/run300.mjs",
     "test": "npm run test:300"

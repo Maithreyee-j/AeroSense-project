@@ -170,6 +170,37 @@ app.post('/api/family/request', auth, async (req, res) => {
   const target = users.get(email);
   if (!target) return res.status(404).json({ error: 'User is not registered' });
   if (target.id === req.user.id) return res.status(400).json({ error: 'You cannot connect to yourself' });
+
+  // Prevent duplicate requests or handle mutual connections cleanly
+  const existing = familyRequests.find(r =>
+    (r.from === req.user.id && r.to === target.id) ||
+    (r.from === target.id && r.to === req.user.id)
+  );
+
+  if (existing) {
+    if (existing.status === 'accepted') {
+      return res.status(400).json({ error: 'Already connected with this family member' });
+    }
+    if (existing.from === req.user.id && existing.status === 'pending') {
+      return res.status(400).json({ error: 'Connection request is already pending' });
+    }
+    if (existing.to === req.user.id && existing.status === 'pending') {
+      existing.status = 'accepted';
+      const responder = [...users.values()].find(u => u.id === req.user.id);
+      const requester = [...users.values()].find(u => u.id === existing.from);
+      if (responder && responder.settings) responder.settings.locationSharing = true;
+      if (requester && requester.settings) requester.settings.locationSharing = true;
+      saveDb();
+      return res.json({ message: 'Mutual connection request accepted!', status: 'accepted' });
+    }
+    existing.status = 'pending';
+    existing.from = req.user.id;
+    existing.to = target.id;
+    existing.createdAt = new Date().toISOString();
+    saveDb();
+    return res.status(201).json({ message: 'Connection request sent' });
+  }
+
   familyRequests.push({ id: id(), from: req.user.id, to: target.id, status: 'pending', createdAt: new Date().toISOString() });
   saveDb();
   res.status(201).json({ message: 'Connection request sent' });
@@ -178,7 +209,8 @@ app.post('/api/family/request', auth, async (req, res) => {
 app.get('/api/family', auth, (req, res) => {
   const mine = familyRequests.filter(r => r.from === req.user.id || r.to === req.user.id);
   const result = mine.map(r => {
-    const other = [...users.values()].find(u => u.id === (r.from === req.user.id ? r.to : r.from));
+    const otherId = r.from === req.user.id ? r.to : r.from;
+    const other = [...users.values()].find(u => u.id === otherId);
     return {
       ...r,
       other: other ? safeUser(other) : null,

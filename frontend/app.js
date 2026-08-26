@@ -259,19 +259,119 @@ function layout(content, activeRoute = 'home') {
 }
 
 // ============================================================================
+// Account & Session Storage Management
+// ============================================================================
+function saveAccountSession(user, authToken) {
+  if (!user || !user.email) return;
+  try {
+    const list = JSON.parse(localStorage.getItem('aerosense_accounts') || '[]');
+    const emailKey = String(user.email).trim().toLowerCase();
+    const idx = list.findIndex(a => String(a.email).trim().toLowerCase() === emailKey);
+    const item = {
+      id: user.id,
+      email: user.email,
+      name: user.name || 'User',
+      role: user.role || 'user',
+      phone: user.phone || '',
+      token: authToken || token || '',
+      lastLogin: new Date().toISOString()
+    };
+    if (idx >= 0) {
+      list[idx] = { ...list[idx], ...item };
+    } else {
+      list.push(item);
+    }
+    localStorage.setItem('aerosense_accounts', JSON.stringify(list));
+    localStorage.setItem('aerosense_user', JSON.stringify(user));
+  } catch {}
+}
+
+function getSavedAccounts() {
+  try {
+    return JSON.parse(localStorage.getItem('aerosense_accounts') || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function removeSavedAccount(email) {
+  try {
+    const list = getSavedAccounts().filter(a => String(a.email).trim().toLowerCase() !== String(email).trim().toLowerCase());
+    localStorage.setItem('aerosense_accounts', JSON.stringify(list));
+    toast('Account removed from this device', 'info');
+    loginPage();
+  } catch {}
+}
+
+window.selectSavedAccount = function(email) {
+  const accounts = getSavedAccounts();
+  const acc = accounts.find(a => String(a.email).trim().toLowerCase() === String(email).trim().toLowerCase());
+  if (!acc) return;
+  const input = document.getElementById('email');
+  if (input) {
+    input.value = acc.email;
+    const pwd = document.getElementById('password');
+    if (pwd) pwd.focus();
+  }
+  toast(`Selected ${acc.name} (${acc.email})`, 'info');
+};
+
+window.quickLoginSavedAccount = async function(email) {
+  const accounts = getSavedAccounts();
+  const acc = accounts.find(a => String(a.email).trim().toLowerCase() === String(email).trim().toLowerCase());
+  if (acc && acc.token) {
+    token = acc.token;
+    localStorage.setItem('aerosense_token', token);
+    toast(`Switching to ${acc.name}...`, 'info');
+    if (await loadMe()) {
+      go('home');
+      return;
+    }
+  }
+  window.selectSavedAccount(email);
+};
+
+window.removeSavedAccount = removeSavedAccount;
+
+// ============================================================================
 // Auth Pages
 // ============================================================================
 function loginPage() {
+  const savedAccounts = getSavedAccounts();
+  const hasSaved = savedAccounts.length > 0;
+
   app.innerHTML = `
     <div class="auth-wrapper">
       <div class="auth card">
         <img src="/icon.png" alt="AeroSense" style="width:64px;height:64px;border-radius:16px;box-shadow:0 8px 24px var(--primary-glow);display:block;margin:0 auto 16px auto">
         <h1 style="text-align:center">AeroSense Sign In</h1>
         <p class="muted" style="text-align:center">Access global atmospheric air quality tracking, family safety radar, and live WHO health intelligence.</p>
-        <form id="login" style="margin-top:18px">
+
+        ${hasSaved ? `
+          <div class="saved-accounts-container" style="margin-top:16px">
+            <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px">⚡ Saved Profiles / Accounts:</div>
+            ${savedAccounts.map(acc => `
+              <div class="saved-account-item" onclick="quickLoginSavedAccount('${esc(acc.email)}')">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div class="account-avatar">${esc((acc.name || 'U').charAt(0).toUpperCase())}</div>
+                  <div>
+                    <div style="font-weight:700;font-size:13.5px;color:var(--text-main)">${esc(acc.name)}</div>
+                    <div class="muted" style="font-size:11.5px">${esc(acc.email)} • <span class="pill ${acc.role==='expert'?'high':'low'}" style="padding:1px 6px;font-size:10px">${esc(acc.role)}</span></div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:4px" onclick="event.stopPropagation()">
+                  <button class="btn sm" style="padding:4px 8px;font-size:11px" onclick="quickLoginSavedAccount('${esc(acc.email)}')">Log In</button>
+                  <button class="btn sm secondary" style="padding:4px 8px;font-size:11px;color:var(--danger)" title="Remove account" onclick="removeSavedAccount('${esc(acc.email)}')">✕</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+
+        <form id="login" style="margin-top:${hasSaved ? '12px' : '18px'}">
           <div class="field">
             <label>Email Address</label>
-            <input id="email" type="email" placeholder="name@example.com" required autocomplete="email">
+            <input id="email" type="email" placeholder="name@example.com" value="${hasSaved ? esc(savedAccounts[0].email) : ''}" required autocomplete="email">
           </div>
           <div class="field">
             <label>Password</label>
@@ -299,6 +399,7 @@ function loginPage() {
       token = d.token;
       localStorage.setItem('aerosense_token', token);
       me = d.user;
+      saveAccountSession(me, token);
       toast(`Welcome back, ${me.name}!`, 'success');
       go('home');
     } catch (err) {
@@ -402,6 +503,7 @@ function registerPage() {
       token = d.token;
       localStorage.setItem('aerosense_token', token);
       me = d.user;
+      saveAccountSession(me, token);
       toast(`Account created! Welcome to AeroSense, ${me.name}!`, 'success');
       go('home');
     } catch (err) {
@@ -412,11 +514,39 @@ function registerPage() {
 
 async function loadMe() {
   if (!token) return false;
+
+  // Hydrate immediately from cached user data if available
   try {
-    me = (await api('/auth/me')).user;
+    const cachedUser = JSON.parse(localStorage.getItem('aerosense_user') || 'null');
+    if (cachedUser && cachedUser.id) {
+      me = cachedUser;
+    }
+  } catch {}
+
+  try {
+    const d = await api('/auth/me');
+    me = d.user;
+    saveAccountSession(me, token);
     return true;
-  } catch {
-    logout(false);
+  } catch (err) {
+    // Only logout if the server genuinely rejected auth with 401
+    const isAuthError = err.message && (
+      err.message.includes('401') ||
+      err.message.includes('Invalid') ||
+      err.message.includes('expired') ||
+      err.message.includes('Authentication required') ||
+      err.message.includes('User not found')
+    );
+
+    if (isAuthError) {
+      logout(false);
+      return false;
+    }
+
+    // Otherwise, if it was a temporary network drop or server reboot, preserve session
+    if (me && me.id) {
+      return true;
+    }
     return false;
   }
 }
@@ -425,6 +555,7 @@ function logout(redir = true) {
   token = null;
   me = null;
   localStorage.removeItem('aerosense_token');
+  localStorage.removeItem('aerosense_user');
   if (redir) {
     toast('You have been logged out.', 'info');
     loginPage();
@@ -1665,11 +1796,61 @@ async function family() {
   loadSmsAlerts();
 }
 
+function renderFamilyListHtml(connections) {
+  if (!connections || !connections.length) {
+    return '<div class="muted">No family connections yet. Invite family members using their registered email!</div>';
+  }
+  return connections.map(x => {
+    const otherName = esc(x.other?.name || 'User');
+    const otherEmail = esc(x.other?.email || '');
+    const otherPhone = x.other?.phone ? esc(x.other.phone) : 'No phone listed';
+    const isAccepted = x.status === 'accepted';
+    const isIncoming = x.status === 'pending' && x.to === me?.id;
+    const loc = x.location || { lat: 28.6139, lon: 77.2090 };
+
+    return `
+      <div class="listitem">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-weight:700;font-size:14px;color:var(--text-main)">👨‍👩‍👧 ${otherName}</div>
+            <div class="muted" style="font-size:12px">${otherEmail} • 📱 ${otherPhone}</div>
+          </div>
+          <span class="pill ${isAccepted?'low':'moderate'}">${esc(x.status)}</span>
+        </div>
+        <div style="margin-top:8px;font-size:12px;color:var(--text-sub)">
+          📍 <b>Location:</b> ${loc.lat.toFixed(3)}, ${loc.lon.toFixed(3)}
+          <button class="btn sm secondary" style="margin-left:8px;padding:3px 8px;font-size:11px" onclick="go('tracking')">🗺️ View on Map</button>
+        </div>
+        ${isIncoming ? `
+          <div style="margin-top:10px;display:flex;gap:6px">
+            <button class="btn sm" onclick="respond('${x.id}', true)">Accept Connection</button>
+            <button class="btn sm secondary" onclick="respond('${x.id}', false)">Decline</button>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join('');
+}
+
 async function refreshFamily() {
+  const list = document.getElementById('familyList');
+  const kidsList = document.getElementById('kidsList');
+
+  // Hydrate immediately from local cache if list is empty
+  if (me && me.id && list && list.innerHTML.includes('Loading connections')) {
+    try {
+      const cached = JSON.parse(localStorage.getItem('aerosense_family_' + me.id) || '[]');
+      if (cached && cached.length) {
+        list.innerHTML = renderFamilyListHtml(cached);
+      }
+    } catch {}
+  }
+
   try {
     const d = await api('/family');
-    const list = document.getElementById('familyList');
-    const kidsList = document.getElementById('kidsList');
+    if (me && me.id) {
+      localStorage.setItem('aerosense_family_' + me.id, JSON.stringify(d.connections || []));
+    }
 
     // Auto-restore / merge kids from persistent localStorage if cloud DB is clean
     let kidsToDisplay = d.kids || [];
@@ -1693,37 +1874,7 @@ async function refreshFamily() {
       if (!d.connections || !d.connections.length) {
         list.innerHTML = '<div class="muted">No family connections yet. Invite family members using their registered email!</div>';
       } else {
-        list.innerHTML = d.connections.map(x => {
-          const otherName = esc(x.other?.name || 'User');
-          const otherEmail = esc(x.other?.email || '');
-          const otherPhone = x.other?.phone ? esc(x.other.phone) : 'No phone listed';
-          const isAccepted = x.status === 'accepted';
-          const isIncoming = x.status === 'pending' && x.to === me.id;
-
-          const loc = x.location || { lat: 28.6139, lon: 77.2090 };
-
-          return `
-            <div class="listitem">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div>
-                  <div style="font-weight:700;font-size:14px;color:var(--text-main)">👨‍👩‍👧 ${otherName}</div>
-                  <div class="muted" style="font-size:12px">${otherEmail} • 📱 ${otherPhone}</div>
-                </div>
-                <span class="pill ${isAccepted?'low':'moderate'}">${esc(x.status)}</span>
-              </div>
-              <div style="margin-top:8px;font-size:12px;color:var(--text-sub)">
-                📍 <b>Location:</b> ${loc.lat.toFixed(3)}, ${loc.lon.toFixed(3)}
-                <button class="btn sm secondary" style="margin-left:8px;padding:3px 8px;font-size:11px" onclick="go('tracking')">🗺️ View on Map</button>
-              </div>
-              ${isIncoming ? `
-                <div style="margin-top:10px;display:flex;gap:6px">
-                  <button class="btn sm" onclick="respond('${x.id}', true)">Accept Connection</button>
-                  <button class="btn sm secondary" onclick="respond('${x.id}', false)">Decline</button>
-                </div>
-              ` : ''}
-            </div>
-          `;
-        }).join('');
+        list.innerHTML = renderFamilyListHtml(d.connections);
       }
     }
 
@@ -1976,6 +2127,7 @@ async function profile() {
         })
       });
       me = d.user;
+      saveAccountSession(me, token);
       profileMsg.innerHTML = '<div class="notice">Health profile and emergency contact saved successfully!</div>';
       toast('Health profile updated!', 'success');
     } catch (err) {
