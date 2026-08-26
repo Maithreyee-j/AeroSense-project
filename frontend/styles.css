@@ -1100,12 +1100,49 @@ input:focus, select:focus, textarea:focus {
     top: 0;
     bottom: 0;
     left: 0;
+    width: 290px;
+    max-width: 85vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
     transform: translateX(-100%);
     box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    z-index: 1000;
   }
 
   .sidebar.open {
     transform: translateX(0);
+  }
+
+  .sidebar-main-scroll {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sidebar-nav {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .sidebar-footer {
+    position: sticky;
+    bottom: 0;
+    margin-top: auto;
+    flex-shrink: 0;
+    background: var(--bg-card-solid);
+    border-top: 1px solid var(--border-subtle);
+    z-index: 20;
   }
 
   .sidebar-backdrop.open {
@@ -1132,6 +1169,7 @@ input:focus, select:focus, textarea:focus {
     height: 380px;
   }
 }
+
 
 /* ==========================================================================
    QR Code Modal & PWA Mobile App Card
