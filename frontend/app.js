@@ -214,15 +214,12 @@ function layout(content, activeRoute = 'home') {
         <!-- Sidebar Footer -->
         <div class="sidebar-footer">
           ${me ? `
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
-              <div class="user-profile-mini" style="flex:1" onclick="go('profile')" title="View & Edit Health Profile">
-                <div class="user-avatar-circle">${esc(me.name ? me.name[0].toUpperCase() : 'U')}</div>
-                <div style="overflow:hidden">
-                  <div style="font-weight:700;font-size:13.5px;color:var(--text-main);white-space:nowrap;text-overflow:ellipsis;overflow:hidden">${esc(me.name || me.email)}</div>
-                  <div class="muted" style="font-size:11.5px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden">${esc(me.phone || me.email)}</div>
-                </div>
+            <div class="user-profile-mini" onclick="go('profile')" title="View & Edit Health Profile">
+              <div class="user-avatar-circle">${esc(me.name ? me.name[0].toUpperCase() : 'U')}</div>
+              <div style="overflow:hidden">
+                <div style="font-weight:700;font-size:13.5px;color:var(--text-main);white-space:nowrap;text-overflow:ellipsis;overflow:hidden">${esc(me.name || me.email)}</div>
+                <div class="muted" style="font-size:11.5px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden">${esc(me.phone || me.email)}</div>
               </div>
-              <button class="btn secondary sm" style="padding:9px 10px;color:var(--danger);border-color:var(--border-subtle)" title="Sign Out of AeroSense" onclick="logout()">🚪</button>
             </div>
           ` : ''}
 
@@ -1130,6 +1127,7 @@ async function tracking() {
   bindCitySearchEvents();
   initMapWithFamily(userLat, userLon);
   loadHospitals(userLat, userLon);
+  searchAndLoadCity(currentSearchedPlace?.name || 'Your Location', userLat, userLon, currentSearchedPlace?.country || '');
 
   const startBtn = document.getElementById('start');
   const stopBtn = document.getElementById('stop');
