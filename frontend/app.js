@@ -108,7 +108,7 @@ function layout(content, activeRoute = 'home') {
         <div class="sidebar-main-scroll">
           <div class="sidebar-header">
             <div class="sidebar-brand-wrapper" onclick="go('home')">
-              <div class="brand-logo">A</div>
+              <img src="/icon.png" alt="AeroSense" class="brand-logo-img">
               <div>
                 <div class="brand-title">AeroSense</div>
                 <div class="brand-sub">● Live Intelligence</div>
@@ -221,9 +221,7 @@ function layout(content, activeRoute = 'home') {
 function loginPage() {
   app.innerHTML = `
     <div class="auth card">
-      <div class="brand-wrapper" style="margin-bottom:14px">
-        <div class="brand-logo" style="margin:auto">A</div>
-      </div>
+      <img src="/icon.png" alt="AeroSense" style="width:64px;height:64px;border-radius:16px;box-shadow:0 8px 24px var(--primary-glow);display:block;margin:0 auto 16px auto">
       <h1 style="text-align:center">AeroSense Sign In</h1>
       <p class="muted" style="text-align:center">Access global atmospheric air quality tracking, family safety radar, and live WHO health intelligence.</p>
       <form id="login" style="margin-top:18px">
@@ -267,9 +265,7 @@ function loginPage() {
 function registerPage() {
   app.innerHTML = `
     <div class="auth card" style="max-width:550px">
-      <div class="brand-wrapper" style="margin-bottom:14px">
-        <div class="brand-logo" style="margin:auto">A</div>
-      </div>
+      <img src="/icon.png" alt="AeroSense" style="width:64px;height:64px;border-radius:16px;box-shadow:0 8px 24px var(--primary-glow);display:block;margin:0 auto 16px auto">
       <h1 style="text-align:center">Create AeroSense Account</h1>
       <p class="muted" style="text-align:center">Join AeroSense to monitor global atmospheric exposure and protect your family with automated risk alerts.</p>
       <form id="reg" style="margin-top:18px">
