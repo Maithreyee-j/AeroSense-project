@@ -113,9 +113,117 @@
       }
     }
   ],
-  "familyRequests": [],
-  "notifications": [],
-  "smsAlerts": [],
-  "kidsProfiles": [],
-  "locations": []
+  "familyRequests": [
+    {
+      "id": "11111111-aaaa-bbbb-cccc-111111111111",
+      "from": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "to": "f7e8d9c0-b1a2-3456-7890-abcdef123456",
+      "toEmail": "sarah.jenkins@family.aerosense.local",
+      "status": "accepted",
+      "createdAt": "2026-08-27T10:00:00.000Z"
+    },
+    {
+      "id": "22222222-aaaa-bbbb-cccc-222222222222",
+      "from": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "to": "89abcdef-0123-4567-89ab-cdef01234567",
+      "toEmail": "ananya.asthma.care@aerosense.org",
+      "status": "accepted",
+      "createdAt": "2026-08-27T10:30:00.000Z"
+    }
+  ],
+  "kidsProfiles": [
+    {
+      "id": "33333333-aaaa-bbbb-cccc-333333333333",
+      "parentId": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "name": "Aarav",
+      "age": 8,
+      "schoolName": "Delhi Public School - R.K. Puram",
+      "lat": 28.5672,
+      "lon": 77.1824,
+      "commuteMode": "School Bus",
+      "departureTime": "07:30 AM",
+      "returnTime": "02:30 PM",
+      "allergies": [
+        "Pollen",
+        "Dust"
+      ],
+      "asthmaLevel": "Mild",
+      "alertsEnabled": true,
+      "createdAt": "2026-08-27T10:00:00.000Z"
+    },
+    {
+      "id": "44444444-aaaa-bbbb-cccc-444444444444",
+      "parentId": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "name": "Maya",
+      "age": 12,
+      "schoolName": "The Mother's International School",
+      "lat": 28.5355,
+      "lon": 77.2023,
+      "commuteMode": "Walk / Metro",
+      "departureTime": "07:45 AM",
+      "returnTime": "03:15 PM",
+      "allergies": [
+        "Cold Air"
+      ],
+      "asthmaLevel": "Moderate",
+      "alertsEnabled": true,
+      "createdAt": "2026-08-27T10:15:00.000Z"
+    }
+  ],
+  "locations": [
+    {
+      "userId": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "lat": 28.6139,
+      "lon": 77.2090,
+      "accuracy": 10.0,
+      "updatedAt": "2026-08-27T11:00:00.000Z"
+    },
+    {
+      "userId": "f7e8d9c0-b1a2-3456-7890-abcdef123456",
+      "lat": 28.6250,
+      "lon": 77.2180,
+      "accuracy": 15.0,
+      "updatedAt": "2026-08-27T11:05:00.000Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "55555555-aaaa-bbbb-cccc-555555555555",
+      "userId": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "type": "warning",
+      "title": "⚠️ High PM2.5 Exposure Alert",
+      "message": "Air quality in Connaught Place reached AQI 168 (Unhealthy for Sensitive Groups). Limit outdoor physical exertion.",
+      "read": false,
+      "createdAt": "2026-08-27T11:15:00.000Z"
+    },
+    {
+      "id": "66666666-aaaa-bbbb-cccc-666666666666",
+      "userId": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "type": "danger",
+      "title": "🚨 School Safe Zone AQI Spike",
+      "message": "Particulate matter near Delhi Public School exceeded safe thresholds (PM2.5: 85 µg/m³). N95 mask recommended for Aarav.",
+      "read": false,
+      "createdAt": "2026-08-27T11:20:00.000Z"
+    }
+  ],
+  "smsAlerts": [
+    {
+      "id": "77777777-aaaa-bbbb-cccc-777777777777",
+      "fromUserId": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "toPhone": "6379103565",
+      "type": "EMERGENCY_SOS",
+      "message": "🚨 [AeroSense EMERGENCY SOS] Maithreyee triggered an Emergency Panic Alert at [28.6139, 77.2090]. Medical tags: Pollen & Dust Allergies. Blood: O+.",
+      "status": "sent",
+      "createdAt": "2026-08-27T11:25:00.000Z"
+    },
+    {
+      "id": "88888888-aaaa-bbbb-cccc-888888888888",
+      "fromUserId": "5d895eef-240a-4e45-903d-0d5faf34c8ca",
+      "toPhone": "+91 98450 12345",
+      "type": "AQI_RISK_WARNING",
+      "message": "⚠️ [AeroSense Risk Alert] High exposure risk detected for your family safe zone.",
+      "status": "sent",
+      "createdAt": "2026-08-27T11:30:00.000Z"
+    }
+  ]
 }
