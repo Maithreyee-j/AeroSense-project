@@ -181,14 +181,18 @@ app.put('/api/settings', auth, (req, res) => {
 // ============================================================================
 app.post('/api/family/request', auth, async (req, res) => {
   const email = String(req.body?.email || '').trim().toLowerCase();
+  if (!email) return res.status(400).json({ error: 'Email is required' });
   const target = users.get(email);
-  if (!target) return res.status(404).json({ error: 'User is not registered' });
-  if (target.id === req.user.id) return res.status(400).json({ error: 'You cannot connect to yourself' });
+  const targetId = target ? target.id : null;
+
+  if (targetId && targetId === req.user.id) {
+    return res.status(400).json({ error: 'You cannot connect to yourself' });
+  }
 
   // Prevent duplicate requests or handle mutual connections cleanly
   const existing = familyRequests.find(r =>
-    (r.from === req.user.id && r.to === target.id) ||
-    (r.from === target.id && r.to === req.user.id)
+    (r.from === req.user.id && ((targetId && r.to === targetId) || r.toEmail === email)) ||
+    (targetId && r.from === targetId && r.to === req.user.id)
   );
 
   if (existing) {
@@ -210,18 +214,26 @@ app.post('/api/family/request', auth, async (req, res) => {
     }
     existing.status = 'pending';
     existing.from = req.user.id;
-    existing.to = target.id;
+    existing.to = targetId;
+    existing.toEmail = email;
     existing.createdAt = new Date().toISOString();
     saveDb();
     syncFamilyConnectionToSupabase(existing).catch(() => {});
     return res.status(201).json({ message: 'Connection request sent' });
   }
 
-  const newReq = { id: id(), from: req.user.id, to: target.id, status: 'pending', createdAt: new Date().toISOString() };
+  const newReq = { 
+    id: id(), 
+    from: req.user.id, 
+    to: targetId, 
+    toEmail: email, 
+    status: target ? 'pending' : 'accepted', 
+    createdAt: new Date().toISOString() 
+  };
   familyRequests.push(newReq);
   saveDb();
-  syncFamilyConnectionToSupabase(newReq).catch(() => {});
-  res.status(201).json({ message: 'Connection request sent' });
+  await syncFamilyConnectionToSupabase(newReq);
+  res.status(201).json({ message: 'Connection request sent successfully!', request: newReq });
 });
 
 app.get('/api/family', auth, (req, res) => {
