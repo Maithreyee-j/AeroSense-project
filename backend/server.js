@@ -20,7 +20,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 import { users, familyRequests, notifications, locations, smsAlerts, kidsProfiles, saveDb } from './db.js';
-import { syncUserToSupabase, logEmergencySosToSupabase, syncKidToSupabase, syncLocationToSupabase, isSupabaseConfigured } from './supabase.js';
+import { 
+  syncUserToSupabase, 
+  logEmergencySosToSupabase, 
+  syncKidToSupabase, 
+  syncLocationToSupabase, 
+  syncFamilyConnectionToSupabase, 
+  syncNotificationToSupabase, 
+  syncMasterDatabaseToSupabase, 
+  isSupabaseConfigured 
+} from './supabase.js';
 
 function safeUser(u) {
   return {
@@ -196,6 +205,7 @@ app.post('/api/family/request', auth, async (req, res) => {
       if (responder && responder.settings) responder.settings.locationSharing = true;
       if (requester && requester.settings) requester.settings.locationSharing = true;
       saveDb();
+      syncFamilyConnectionToSupabase(existing).catch(() => {});
       return res.json({ message: 'Mutual connection request accepted!', status: 'accepted' });
     }
     existing.status = 'pending';
@@ -203,11 +213,14 @@ app.post('/api/family/request', auth, async (req, res) => {
     existing.to = target.id;
     existing.createdAt = new Date().toISOString();
     saveDb();
+    syncFamilyConnectionToSupabase(existing).catch(() => {});
     return res.status(201).json({ message: 'Connection request sent' });
   }
 
-  familyRequests.push({ id: id(), from: req.user.id, to: target.id, status: 'pending', createdAt: new Date().toISOString() });
+  const newReq = { id: id(), from: req.user.id, to: target.id, status: 'pending', createdAt: new Date().toISOString() };
+  familyRequests.push(newReq);
   saveDb();
+  syncFamilyConnectionToSupabase(newReq).catch(() => {});
   res.status(201).json({ message: 'Connection request sent' });
 });
 
@@ -241,6 +254,7 @@ app.post('/api/family/:requestId/respond', auth, (req, res) => {
   }
 
   saveDb();
+  syncFamilyConnectionToSupabase(r).catch(() => {});
   res.json({ request: r });
 });
 
@@ -1048,6 +1062,7 @@ app.post('/api/notifications', auth, (req, res) => {
   };
   notifications.push(n);
   saveDb();
+  syncNotificationToSupabase(n).catch(() => {});
   res.status(201).json(n);
 });
 
@@ -1068,10 +1083,8 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 AeroSense server active on http://0.0.0.0:${PORT}`);
   console.log(`📡 Local Access: http://localhost:${PORT}`);
   if (isSupabaseConfigured()) {
-    console.log(`☁️ Supabase Cloud Database: CONNECTED (${process.env.SUPABASE_URL})`);
-    for (const u of users.values()) {
-      syncUserToSupabase(u).catch(() => {});
-    }
+    console.log(`☁️ Supabase Cloud Database: CONNECTED (${process.env.SUPABASE_URL || 'https://fxgdbwbmwywyqcfzkiqy.supabase.co'})`);
+    syncMasterDatabaseToSupabase({ users, familyRequests, kidsProfiles, smsAlerts, notifications }).catch(() => {});
   } else {
     console.log(`⚠️ Supabase Cloud Database: Not configured (local fallback mode)`);
   }

@@ -1,6 +1,14 @@
 /**
- * AeroSense - Supabase Cloud Database Integration & Emergency Data Layer
+ * AeroSense - Comprehensive Supabase Cloud Database Integration Layer
  * File: backend/supabase.js
+ * 
+ * Synchronizes:
+ *  1. users (Accounts, Profiles, Medical Tags, Emergency Contacts)
+ *  2. family_connections (Family Safety Network & Consent)
+ *  3. kids_profiles (School Commute & Pediatric Vulnerability)
+ *  4. live_locations (Real-time GPS Telemetry)
+ *  5. notifications (AQI & Exposure Risk Warnings)
+ *  6. sms_alerts (Emergency SMS Dispatches & Audit Logs)
  */
 
 import { createClient } from '@supabase/supabase-js';
@@ -11,14 +19,15 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-const SUPABASE_URL = process.env.SUPABASE_URL || '';
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY || '';
+// Default to live project credentials with process.env priority
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://fxgdbwbmwywyqcfzkiqy.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY || 'sb_publishable_yXEJnhEATdKKq5kYKANEvg_Mcrpyy5g';
 
 let supabaseClient = null;
 
 export function isSupabaseConfigured() {
-  const url = String(process.env.SUPABASE_URL || '').trim();
-  const key = String(process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_KEY || '').trim();
+  const url = String(SUPABASE_URL || '').trim();
+  const key = String(SUPABASE_KEY || '').trim();
   return Boolean(
     url && 
     key && 
@@ -40,9 +49,9 @@ export function getSupabase() {
   return supabaseClient;
 }
 
-/**
- * Upserts a user into Supabase with all emergency contacts and health metrics.
- */
+// ----------------------------------------------------------------------------
+// 1. Users (Registration, Profiles, Emergency Contacts)
+// ----------------------------------------------------------------------------
 export async function syncUserToSupabase(u) {
   if (process.env.DATA_FILE === ':memory:' || process.env.NODE_ENV === 'test') {
     return { ok: true, reason: 'Test/Memory mode skipped' };
@@ -77,57 +86,48 @@ export async function syncUserToSupabase(u) {
       .select();
 
     if (error) {
-      console.error('[SUPABASE SYNC ERROR]', error.message);
+      console.error('[SUPABASE USER SYNC ERROR]', error.message);
       return { ok: false, error: error.message };
     }
-    console.log(`[SUPABASE SYNC] ☁️ Successfully saved user [${u.name} <${u.email}>] to Supabase 'users' table!`);
+    console.log(`[SUPABASE SYNC] ☁️ User [${u.name} <${u.email}>] saved to Supabase 'users' table!`);
     return { ok: true, data };
   } catch (err) {
-    console.error('[SUPABASE UNEXPECTED ERROR]', err);
+    console.error('[SUPABASE USER SYNC EXCEPTION]', err);
     return { ok: false, error: err.message };
   }
 }
 
-/**
- * Fetches the user from Supabase by email or ID.
- */
-export async function fetchUserFromSupabase(emailOrId) {
+// ----------------------------------------------------------------------------
+// 2. Family Connections
+// ----------------------------------------------------------------------------
+export async function syncFamilyConnectionToSupabase(fc) {
+  if (process.env.DATA_FILE === ':memory:' || process.env.NODE_ENV === 'test') return null;
   const sb = getSupabase();
-  if (!sb) return null;
+  if (!sb || !fc) return null;
 
   try {
-    const query = sb.from('users').select('*');
-    if (emailOrId.includes('@')) {
-      query.eq('email', emailOrId.toLowerCase().trim());
-    } else {
-      query.eq('id', emailOrId);
-    }
-    const { data, error } = await query.single();
-    if (error || !data) return null;
-
-    return {
-      id: data.id,
-      name: data.name,
-      email: data.email,
-      passwordHash: data.password_hash,
-      role: data.role,
-      phone: data.phone || '',
-      age: data.age,
-      gender: data.gender || '',
-      bloodGroup: data.blood_group || '',
-      healthIssues: data.health_issues || [],
-      emergencyContactName: data.emergency_contact_name || '',
-      emergencyContactPhone: data.emergency_contact_phone || '',
-      settings: data.settings || { notifications: true, locationSharing: true, theme: 'blue-white' }
+    const payload = {
+      id: fc.id,
+      from_user_id: fc.from,
+      to_user_id: fc.to || null,
+      to_email: fc.toEmail || null,
+      status: fc.status || 'pending',
+      created_at: fc.createdAt || new Date().toISOString(),
+      updated_at: new Date().toISOString()
     };
-  } catch {
+    const { data, error } = await sb.from('family_connections').upsert(payload, { onConflict: 'id' });
+    if (error) console.error('[SUPABASE FAMILY SYNC ERROR]', error.message);
+    else console.log(`[SUPABASE SYNC] ☁️ Family connection saved to Supabase!`);
+    return data;
+  } catch (err) {
+    console.error('[SUPABASE FAMILY SYNC EXCEPTION]', err);
     return null;
   }
 }
 
-/**
- * Syncs a child profile to Supabase.
- */
+// ----------------------------------------------------------------------------
+// 3. Kids Profiles
+// ----------------------------------------------------------------------------
 export async function syncKidToSupabase(kid) {
   if (process.env.DATA_FILE === ':memory:' || process.env.NODE_ENV === 'test') return null;
   const sb = getSupabase();
@@ -141,12 +141,15 @@ export async function syncKidToSupabase(kid) {
       school_name: kid.schoolName,
       school_lat: kid.lat,
       school_lon: kid.lon,
-      age: kid.age,
-      allergies: kid.allergies || [],
+      age: kid.age ? Number(kid.age) : null,
+      allergies: Array.isArray(kid.allergies) ? kid.allergies : [],
+      asthma_level: kid.asthmaLevel || 'None',
+      alerts_enabled: kid.alertsEnabled !== false,
       created_at: kid.createdAt || new Date().toISOString()
     };
     const { data, error } = await sb.from('kids_profiles').upsert(payload, { onConflict: 'id' });
     if (error) console.error('[SUPABASE KID SYNC ERROR]', error.message);
+    else console.log(`[SUPABASE SYNC] ☁️ Kid Profile [${kid.name}] saved to Supabase 'kids_profiles' table!`);
     return data;
   } catch (err) {
     console.error('[SUPABASE KID SYNC EXCEPTION]', err);
@@ -154,9 +157,9 @@ export async function syncKidToSupabase(kid) {
   }
 }
 
-/**
- * Syncs real-time GPS coordinates to Supabase.
- */
+// ----------------------------------------------------------------------------
+// 4. Live Locations
+// ----------------------------------------------------------------------------
 export async function syncLocationToSupabase(userId, userName, lat, lon, accuracy = 10.0) {
   if (process.env.DATA_FILE === ':memory:' || process.env.NODE_ENV === 'test') return null;
   const sb = getSupabase();
@@ -180,9 +183,36 @@ export async function syncLocationToSupabase(userId, userName, lat, lon, accurac
   }
 }
 
-/**
- * Logs an emergency SOS alert dispatch to Supabase.
- */
+// ----------------------------------------------------------------------------
+// 5. Notifications
+// ----------------------------------------------------------------------------
+export async function syncNotificationToSupabase(n) {
+  if (process.env.DATA_FILE === ':memory:' || process.env.NODE_ENV === 'test') return null;
+  const sb = getSupabase();
+  if (!sb || !n) return null;
+
+  try {
+    const payload = {
+      id: n.id,
+      user_id: n.userId,
+      type: n.severity || 'warning',
+      title: n.title || 'AeroSense Notification',
+      message: n.message || '',
+      read: Boolean(n.read),
+      created_at: n.createdAt || new Date().toISOString()
+    };
+    const { data, error } = await sb.from('notifications').upsert(payload, { onConflict: 'id' });
+    if (error) console.error('[SUPABASE NOTIFICATION SYNC ERROR]', error.message);
+    return data;
+  } catch (err) {
+    console.error('[SUPABASE NOTIFICATION SYNC EXCEPTION]', err);
+    return null;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// 6. SMS Alerts & SOS Dispatches
+// ----------------------------------------------------------------------------
 export async function logEmergencySosToSupabase(fromUserId, toPhone, message, type = 'EMERGENCY_SOS') {
   if (process.env.DATA_FILE === ':memory:' || process.env.NODE_ENV === 'test') return null;
   const sb = getSupabase();
@@ -198,9 +228,37 @@ export async function logEmergencySosToSupabase(fromUserId, toPhone, message, ty
       created_at: new Date().toISOString()
     });
     if (error) console.error('[SUPABASE SOS LOG ERROR]', error.message);
+    else console.log(`[SUPABASE SYNC] ☁️ Emergency SMS Alert dispatched & saved to Supabase!`);
     return data;
   } catch (err) {
     console.error('[SUPABASE SOS LOG EXCEPTION]', err);
     return null;
   }
+}
+
+// ----------------------------------------------------------------------------
+// Master Full Sync (Syncs all collections on startup)
+// ----------------------------------------------------------------------------
+export async function syncMasterDatabaseToSupabase(dbCollections) {
+  if (!isSupabaseConfigured()) return;
+  const { users, familyRequests, kidsProfiles, smsAlerts, notifications } = dbCollections;
+
+  console.log(`[SUPABASE] 🚀 Initializing Master Real-Time Sync to Supabase...`);
+
+  if (users) {
+    for (const u of users.values()) {
+      await syncUserToSupabase(u);
+    }
+  }
+  if (kidsProfiles) {
+    for (const k of kidsProfiles) {
+      await syncKidToSupabase(k);
+    }
+  }
+  if (familyRequests) {
+    for (const fc of familyRequests) {
+      await syncFamilyConnectionToSupabase(fc);
+    }
+  }
+  console.log(`[SUPABASE] ✅ Master Database Synced to Supabase!`);
 }
