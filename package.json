@@ -9,14 +9,31 @@
     "dev": "node --watch --watch-path=backend backend/server.js",
     "tunnel": "npx -y localtunnel --port 3000",
     "test:300": "node tests/run300.mjs",
-    "test": "npm run test:300"
+    "test:selenium": "node selenium-tests/tests/login-tests.js",
+    "report:selenium": "python selenium-tests/generate_test_report_excel.py",
+    "test:appium": "node appium-tests/tests/app-tests.js",
+    "report:appium": "python appium-tests/generate_appium_test_report_excel.py",
+    "test": "npm run test:selenium",
+    "test:all": "npm run test:300 && npm run test:selenium && npm run test:appium",
+    "test:full-suite": "npm run test:300 && npm run test:selenium && npm run test:appium && npm run test:load && npm run security:review",
+    "test:load": "node load-tests/run-load-test.js",
+    "report:load": "python load-tests/generate_load_test_report_excel.py",
+    "report:all": "python export_database_to_excel.py && python selenium-tests/generate_test_report_excel.py && python appium-tests/generate_appium_test_report_excel.py && python generate_security_reports.py && python load-tests/generate_load_test_report_excel.py",
+    "security:review": "python generate_security_reports.py",
+    "export:db": "python export_database_to_excel.py"
   },
   "dependencies": {
-    "express": "^5.1.0",
-    "cors": "^2.8.5",
-    "helmet": "^8.1.0",
     "bcryptjs": "^3.0.2",
-    "jsonwebtoken": "^9.0.2",
-    "dotenv": "^17.2.1"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "autocannon": "^8.0.0",
+    "chromedriver": "^152.0.2",
+    "selenium-webdriver": "^4.47.0",
+    "webdriverio": "^9.31.3"
   }
 }
