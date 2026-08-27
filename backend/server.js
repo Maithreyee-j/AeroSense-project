@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 import { users, familyRequests, notifications, locations, smsAlerts, kidsProfiles, saveDb } from './db.js';
+import { syncUserToSupabase, logEmergencySosToSupabase, syncKidToSupabase, syncLocationToSupabase, isSupabaseConfigured } from './supabase.js';
 
 function safeUser(u) {
   return {
@@ -105,6 +106,7 @@ app.post('/api/auth/register', async (req, res) => {
   };
   users.set(key, u);
   saveDb();
+  syncUserToSupabase(u).catch(() => {});
   res.status(201).json({ token: sign(u), user: safeUser(u) });
 });
 
@@ -114,6 +116,7 @@ app.post('/api/auth/login', async (req, res) => {
   if (!u || !(await bcrypt.compare(String(password || ''), u.passwordHash))) {
     return res.status(401).json({ error: 'Invalid email or password' });
   }
+  syncUserToSupabase(u).catch(() => {});
   res.json({ token: sign(u), user: safeUser(u) });
 });
 
@@ -143,6 +146,7 @@ app.put('/api/profile', auth, (req, res) => {
   if (b.emergencyContactPhone !== undefined) u.emergencyContactPhone = String(b.emergencyContactPhone);
   if (b.healthProfile !== undefined) u.healthProfile = b.healthProfile;
   saveDb();
+  syncUserToSupabase(u).catch(() => {});
   res.json({ user: safeUser(u) });
 });
 
@@ -156,6 +160,7 @@ app.put('/api/settings', auth, (req, res) => {
   if (u) {
     u.settings = { ...u.settings, ...req.body };
     saveDb();
+    syncUserToSupabase(u).catch(() => {});
     res.json({ settings: u.settings });
   } else {
     res.status(404).json({ error: 'User not found' });
@@ -254,6 +259,9 @@ app.post('/api/tracking/location', auth, (req, res) => {
   }
 
   saveDb();
+  if (u) {
+    syncLocationToSupabase(req.user.id, u.name, lat, lon, Number(accuracy) || 10.0).catch(() => {});
+  }
   res.json({ location: locations.get(req.user.id) });
 });
 
@@ -315,6 +323,7 @@ app.post('/api/family/kids', auth, (req, res) => {
 
   kidsProfiles.push(kid);
   saveDb();
+  syncKidToSupabase(kid).catch(() => {});
   res.status(201).json({ kid, kids: kidsProfiles.filter(k => k.parentId === req.user.id) });
 });
 
@@ -476,6 +485,9 @@ app.post('/api/family/sos-alert', auth, async (req, res) => {
   }
 
   saveDb();
+  if (sender?.emergencyContactPhone) {
+    logEmergencySosToSupabase(req.user.id, sender.emergencyContactPhone, sosText, 'EMERGENCY_SOS').catch(() => {});
+  }
   res.json({ ok: true, message: 'Emergency SOS broadcasted via SMS to family and emergency contacts.', dispatchedCount: targetUsers.length });
 });
 
@@ -1052,6 +1064,16 @@ app.use((req, res, next) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`AeroSense server active on http://0.0.0.0:${PORT}`);
-  console.log(`Local Access: http://localhost:${PORT}`);
+  console.log(`\n======================================================`);
+  console.log(`🚀 AeroSense server active on http://0.0.0.0:${PORT}`);
+  console.log(`📡 Local Access: http://localhost:${PORT}`);
+  if (isSupabaseConfigured()) {
+    console.log(`☁️ Supabase Cloud Database: CONNECTED (${process.env.SUPABASE_URL})`);
+    for (const u of users.values()) {
+      syncUserToSupabase(u).catch(() => {});
+    }
+  } else {
+    console.log(`⚠️ Supabase Cloud Database: Not configured (local fallback mode)`);
+  }
+  console.log(`======================================================\n`);
 });

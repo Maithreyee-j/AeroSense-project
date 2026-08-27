@@ -1,22 +1,22 @@
 {
-  "testDate": "2026-08-27T05:14:40.460Z",
+  "testDate": "2026-08-27T06:25:38.739Z",
   "concurrency": 100,
   "durationSeconds": 60,
-  "rps": 32,
+  "rps": 65,
   "latency": {
-    "average": 1450.08,
+    "average": 1438.87,
     "min": 1,
-    "max": 8059,
-    "p50": 12,
-    "p90": 8008,
-    "p95": 8040,
-    "p99": 8044
+    "max": 8036,
+    "p50": 9,
+    "p90": 8007,
+    "p95": 8020,
+    "p99": 8027
   },
-  "totalRequests": 1934,
-  "successCount": 1934,
+  "totalRequests": 3900,
+  "successCount": 3900,
   "non2xx": 0,
-  "errors": 317642,
+  "errors": 0,
   "timeouts": 0,
   "successRate": 100,
-  "throughputMB": 4.14
+  "throughputMB": 8.79
 }

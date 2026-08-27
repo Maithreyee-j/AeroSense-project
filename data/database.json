@@ -7,11 +7,109 @@
       "passwordHash": "$2b$10$ELDy2qDwUDbF5UJNB/D29O2CGWeMNR36Nnm3LHex4iAB.dAG0u6qK",
       "role": "user",
       "phone": "6379103565",
+      "age": 22,
+      "gender": "Female",
+      "bloodGroup": "O+",
+      "healthIssues": [
+        "Pollen & Dust Allergies"
+      ],
+      "emergencyContactName": "Primary Emergency Contact",
+      "emergencyContactPhone": "6379103565",
+      "healthProfile": {
+        "allergies": [
+          "Pollen",
+          "Dust"
+        ]
+      },
+      "settings": {
+        "notifications": true,
+        "locationSharing": true,
+        "theme": "blue-white"
+      }
+    },
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-112233445566",
+      "name": "Dr. Rajesh Kumar",
+      "email": "dr.rajesh.pulmo@aerosense.health",
+      "passwordHash": "$2b$10$ELDy2qDwUDbF5UJNB/D29O2CGWeMNR36Nnm3LHex4iAB.dAG0u6qK",
+      "role": "expert",
+      "phone": "+91 98450 12345",
+      "age": 48,
+      "gender": "Male",
+      "bloodGroup": "B+",
+      "healthIssues": [],
+      "emergencyContactName": "City Hospital ER",
+      "emergencyContactPhone": "+91 98450 99999",
+      "healthProfile": {},
+      "settings": {
+        "notifications": true,
+        "locationSharing": false,
+        "theme": "dark-slate"
+      }
+    },
+    {
+      "id": "f7e8d9c0-b1a2-3456-7890-abcdef123456",
+      "name": "Sarah Jenkins",
+      "email": "sarah.jenkins@family.aerosense.local",
+      "passwordHash": "$2b$10$ELDy2qDwUDbF5UJNB/D29O2CGWeMNR36Nnm3LHex4iAB.dAG0u6qK",
+      "role": "user",
+      "phone": "+1 (555) 234-5678",
+      "age": 34,
+      "gender": "Female",
+      "bloodGroup": "A+",
+      "healthIssues": [
+        "Asthma"
+      ],
+      "emergencyContactName": "Robert Jenkins",
+      "emergencyContactPhone": "+1 (555) 234-5679",
       "healthProfile": {},
       "settings": {
         "notifications": true,
         "locationSharing": true,
         "theme": "blue-white"
+      }
+    },
+    {
+      "id": "89abcdef-0123-4567-89ab-cdef01234567",
+      "name": "Ananya Sharma",
+      "email": "ananya.asthma.care@aerosense.org",
+      "passwordHash": "$2b$10$ELDy2qDwUDbF5UJNB/D29O2CGWeMNR36Nnm3LHex4iAB.dAG0u6qK",
+      "role": "user",
+      "phone": "+91 91234 56789",
+      "age": 28,
+      "gender": "Female",
+      "bloodGroup": "AB+",
+      "healthIssues": [
+        "Asthma",
+        "Pollen & Dust Allergies"
+      ],
+      "emergencyContactName": "Vikram Sharma",
+      "emergencyContactPhone": "+91 91234 56780",
+      "healthProfile": {},
+      "settings": {
+        "notifications": true,
+        "locationSharing": true,
+        "theme": "emerald"
+      }
+    },
+    {
+      "id": "c3d4e5f6-7890-abcd-ef01-23456789abcd",
+      "name": "Dr. Priya Nambiar",
+      "email": "dr.priya.epidemiology@who-network.org",
+      "passwordHash": "$2b$10$ELDy2qDwUDbF5UJNB/D29O2CGWeMNR36Nnm3LHex4iAB.dAG0u6qK",
+      "role": "expert",
+      "phone": "+91 94440 98765",
+      "age": 42,
+      "gender": "Female",
+      "bloodGroup": "O+",
+      "healthIssues": [],
+      "emergencyContactName": "Apollo Emergency Response",
+      "emergencyContactPhone": "+91 94440 11111",
+      "healthProfile": {},
+      "settings": {
+        "notifications": true,
+        "locationSharing": false,
+        "theme": "dark-slate"
       }
     }
   ],

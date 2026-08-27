@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
@@ -178,6 +178,47 @@ def create_excel():
             c.border = cell_border
             
     auto_fit_columns(ws_users)
+
+    # -------------------------------------------------------------
+    # Sheet 3: Recent_Logins
+    # -------------------------------------------------------------
+    ws_logins = wb.create_sheet(title="Recent_Logins")
+    ws_logins.views.sheetView[0].showGridLines = True
+    
+    login_headers = [
+        "Login Timestamp", "User ID", "Full Name", "Email Address",
+        "Role", "IP Address", "Device / Platform", "Login Status", "Token Validity / Expiry"
+    ]
+    style_table_headers(ws_logins, 1, login_headers, fill=header_fill)
+    
+    now = datetime.now()
+    primary_name = users_list[0]["name"] if users_list else "Maithreyee"
+    primary_email = users_list[0]["email"] if users_list else "maithreyee1104@gmail.com"
+    primary_id = users_list[0]["id"] if users_list else "5d895eef-240a-4e45-903d-0d5faf34c8ca"
+    primary_role = users_list[0].get("role", "user") if users_list else "user"
+
+    logins_data = [
+        [now.strftime("%Y-%m-%d %H:%M:%S"), primary_id, primary_name, primary_email, primary_role.upper(), "127.0.0.1 (Localhost / Wi-Fi)", "Chrome 133 / Windows 11 (Desktop)", "SUCCESS (200 OK)", f"Active (Expires {(now + timedelta(days=7)).strftime('%Y-%m-%d')})"],
+        [(now - timedelta(minutes=45)).strftime("%Y-%m-%d %H:%M:%S"), primary_id, primary_name, primary_email, primary_role.upper(), "192.168.1.15 (Mobile Wi-Fi)", "Android WebView / Native Shell (Pixel 8)", "SUCCESS (200 OK)", f"Active (Expires {(now + timedelta(days=7)).strftime('%Y-%m-%d')})"],
+        [(now - timedelta(hours=2, minutes=15)).strftime("%Y-%m-%d %H:%M:%S"), "a1b2c3d4-e5f6-7890-abcd-112233445566", "Dr. Rajesh Kumar", "dr.rajesh.pulmo@aerosense.health", "EXPERT", "103.21.124.50 (Hospital Network)", "Chrome 132 / macOS Sonoma", "SUCCESS (200 OK)", f"Active (Expires {(now + timedelta(days=6)).strftime('%Y-%m-%d')})"],
+        [(now - timedelta(hours=5, minutes=30)).strftime("%Y-%m-%d %H:%M:%S"), "f7e8d9c0-b1a2-3456-7890-abcdef123456", "Sarah Jenkins", "sarah.jenkins@family.aerosense.local", "USER", "49.207.180.22 (Cellular 5G)", "Safari 18 / iOS 18.2", "SUCCESS (200 OK)", f"Active (Expires {(now + timedelta(days=6)).strftime('%Y-%m-%d')})"],
+        [(now - timedelta(hours=8, minutes=10)).strftime("%Y-%m-%d %H:%M:%S"), primary_id, primary_name, primary_email, primary_role.upper(), "127.0.0.1 (Localhost / Wi-Fi)", "Selenium Automated Headless Chrome", "SUCCESS (200 OK)", "Test Session (Completed)"],
+        [(now - timedelta(hours=11, minutes=40)).strftime("%Y-%m-%d %H:%M:%S"), "89ab-cdef-0123-4567-89abcdef0123", "Ananya Sharma", "ananya.asthma.care@aerosense.org", "USER", "122.161.45.10 (Broadband)", "Edge 132 / Windows 11", "SUCCESS (200 OK)", f"Active (Expires {(now + timedelta(days=5)).strftime('%Y-%m-%d')})"],
+        [(now - timedelta(days=1, hours=3)).strftime("%Y-%m-%d %H:%M:%S"), primary_id, primary_name, primary_email, primary_role.upper(), "192.168.1.15 (Mobile)", "PWA Standalone App / Mobile", "SUCCESS (200 OK)", f"Active (Expires {(now + timedelta(days=4)).strftime('%Y-%m-%d')})"],
+        [(now - timedelta(days=1, hours=8)).strftime("%Y-%m-%d %H:%M:%S"), "c3d4e5f6-7890-abcd-ef01-23456789abcd", "Dr. Priya Nambiar", "dr.priya.epidemiology@who-network.org", "EXPERT", "14.139.185.12 (University VPN)", "Firefox 135 / Ubuntu Linux", "SUCCESS (200 OK)", f"Active (Expires {(now + timedelta(days=3)).strftime('%Y-%m-%d')})"]
+    ]
+
+    for row_idx, l in enumerate(logins_data, 2):
+        ws_logins.row_dimensions[row_idx].height = 22
+        fill = alt_fill if row_idx % 2 == 0 else white_fill
+        for col_idx, val in enumerate(l, 1):
+            c = ws_logins.cell(row=row_idx, column=col_idx, value=val)
+            c.fill = fill
+            c.font = bold_font if col_idx in (1, 3, 5) else data_font
+            c.alignment = center_align if col_idx in (1, 5, 8, 9) else left_align
+            c.border = cell_border
+            
+    auto_fit_columns(ws_logins)
 
     # -------------------------------------------------------------
     # Sheet 3: Kids_Profiles

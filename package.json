@@ -20,9 +20,11 @@
     "report:load": "python load-tests/generate_load_test_report_excel.py",
     "report:all": "python export_database_to_excel.py && python selenium-tests/generate_test_report_excel.py && python appium-tests/generate_appium_test_report_excel.py && python generate_security_reports.py && python load-tests/generate_load_test_report_excel.py",
     "security:review": "python generate_security_reports.py",
+    "db:sync:supabase": "node backend/sync_to_supabase.js",
     "export:db": "python export_database_to_excel.py"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.4",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",

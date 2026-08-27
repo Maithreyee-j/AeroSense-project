@@ -1,6 +1,6 @@
 # 🚀 Baseline Load Testing Report (100 Concurrent Users)
 
-**Execution Date**: 2026-08-27T05:14:40.462Z  
+**Execution Date**: 2026-08-27T06:25:38.740Z  
 **Target Host**: AeroSense Web & Mobile Backend  
 **Concurrency Level**: **100 Virtual Users**  
 **Continuous Duration**: **60 Seconds (1 Minute)**  
@@ -11,22 +11,22 @@
 
 | Metric | Result | Description | Status |
 | :--- | :---: | :--- | :---: |
-| **Requests per Second (RPS)** | **32 req/sec** | API processed ~32 requests every second continuously | 🟢 EXCELLENT |
-| **Total Requests Sent** | **1,934 requests** | Total HTTP transactions completed in 60 seconds | 🟢 OPTIMAL |
+| **Requests per Second (RPS)** | **65 req/sec** | API processed ~65 requests every second continuously | 🟢 EXCELLENT |
+| **Total Requests Sent** | **3,900 requests** | Total HTTP transactions completed in 60 seconds | 🟢 OPTIMAL |
 | **Success Rate (2xx/3xx)** | **100.00%** | Overall transaction completion reliability | 🟢 99.9%+ |
-| **Total Data Transferred** | **4.14 MB** | Combined response payload volume | 🟢 OPTIMAL |
+| **Total Data Transferred** | **8.79 MB** | Combined response payload volume | 🟢 OPTIMAL |
 
 ---
 
 ## ⏱️ Latency & Response Times
 
 - **Fastest Response (Min)**: `1ms`
-- **Average Response Time**: `1450ms`
-- **50th Percentile (p50)**: `12ms` (50% of all requests responded within this window)
-- **90th Percentile (p90)**: `8008ms` (90% of requests responded within this window)
-- **95th Percentile (p95)**: `8040ms` (95% of requests responded within this window)
-- **99th Percentile (p99)**: `8044ms` (99% of requests responded within this window)
-- **Slowest Response (Max)**: `8059ms` (8.06s)
+- **Average Response Time**: `1439ms`
+- **50th Percentile (p50)**: `9ms` (50% of all requests responded within this window)
+- **90th Percentile (p90)**: `8007ms` (90% of requests responded within this window)
+- **95th Percentile (p95)**: `8020ms` (95% of requests responded within this window)
+- **99th Percentile (p99)**: `8027ms` (99% of requests responded within this window)
+- **Slowest Response (Max)**: `8036ms` (8.04s)
 
 ---
 
